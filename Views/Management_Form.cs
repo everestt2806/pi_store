@@ -8,18 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace pi_store
+namespace pi_store.Views
 {
-    public partial class Form1 : Form
+    public partial class Management_Form : Form
     {
-        public Form1()
+        public Management_Form()
         {
             InitializeComponent();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
