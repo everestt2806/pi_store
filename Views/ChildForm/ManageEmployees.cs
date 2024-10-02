@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace pi_store.Views.ChildForm
 {
-    public partial class Form5 : Form
+    public partial class ManageEmployees : Form
     {
-        public Form5()
+        public ManageEmployees()
         {
             InitializeComponent();
         }

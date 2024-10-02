@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.Windows.Media;
 using TheArtOfDevHtmlRenderer.Adapters.Entities;
 using Color = System.Drawing.Color;
+using pi_store.Views.ChildForm;
 
 namespace pi_store.Views
 {
@@ -18,7 +19,7 @@ namespace pi_store.Views
     {
         private IconButton currentBtn;
         private Panel leftBorderBtn;
-        private Form curentForm;
+        private Form currentForm;
         public static Color leftBorderColor = Color.FromArgb(49, 24, 96);
         public Management_Form()
         {
@@ -39,11 +40,11 @@ namespace pi_store.Views
 
         private void openChildForm(Form childForm)
         {
-            if (iconChildform != null)
+            if (currentForm != null)
             {
-                curentForm.Close();
+                currentForm.Close();
             }
-            curentForm = childForm;
+            currentForm = childForm;
             childForm.TopLevel = false;
             childForm.FormBorderStyle = FormBorderStyle.None;
             childForm.Dock = DockStyle.Fill;
@@ -51,7 +52,7 @@ namespace pi_store.Views
             mainPanel.Tag = childForm;
             childForm.BringToFront();
             childForm.Show();
-            childFormTitle.Text = childForm.Text;
+            childForm.Text = childFormTitle.Text;
         }
 
         private void activateBtn(object senderBtn, System.Drawing.Color color) {
@@ -102,6 +103,7 @@ namespace pi_store.Views
         private void menu_employ_Click(object sender, EventArgs e)
         {
             activateBtn(sender, leftBorderColor);
+            openChildForm(new ManageEmployees());
         }
 
         private void menu_products_Click(object sender, EventArgs e)

@@ -1,6 +1,6 @@
 ﻿namespace pi_store.Views.ChildForm
 {
-    partial class Form3
+    partial class GenerateBill
     {
         /// <summary>
         /// Required designer variable.
@@ -30,13 +30,13 @@
         {
             this.SuspendLayout();
             // 
-            // Form3
+            // Form6
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1385, 898);
-            this.Name = "Form3";
-            this.Text = "Form3";
+            this.Name = "Form6";
+            this.Text = "Form6";
             this.ResumeLayout(false);
 
         }

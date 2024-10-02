@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace pi_store.Views.ChildForm
 {
-    public partial class Form4 : Form
+    public partial class GenerateBill : Form
     {
-        public Form4()
+        public GenerateBill()
         {
             InitializeComponent();
         }

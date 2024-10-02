@@ -1,6 +1,6 @@
 ﻿namespace pi_store.Views.ChildForm
 {
-    partial class Form2
+    partial class PlaceOrder
     {
         /// <summary>
         /// Required designer variable.
@@ -30,13 +30,13 @@
         {
             this.SuspendLayout();
             // 
-            // Form2
+            // Form5
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1385, 898);
-            this.Name = "Form2";
-            this.Text = "Form2";
+            this.Name = "Form5";
+            this.Text = "Form5";
             this.ResumeLayout(false);
 
         }

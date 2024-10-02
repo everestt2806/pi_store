@@ -77,41 +77,41 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Views\ChildForm\Form1.cs">
+    <Compile Include="Views\ChildForm\ManageEmployees.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\ChildForm\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Views\ChildForm\ManageEmployees.Designer.cs">
+      <DependentUpon>ManageEmployees.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\ChildForm\Form2.cs">
+    <Compile Include="Views\ChildForm\ManageClients.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\ChildForm\Form2.Designer.cs">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <Compile Include="Views\ChildForm\ManageClients.Designer.cs">
+      <DependentUpon>ManageClients.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\ChildForm\Form3.cs">
+    <Compile Include="Views\ChildForm\ManageProducts.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\ChildForm\Form3.Designer.cs">
-      <DependentUpon>Form3.cs</DependentUpon>
+    <Compile Include="Views\ChildForm\ManageProducts.Designer.cs">
+      <DependentUpon>ManageProducts.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\ChildForm\Form4.cs">
+    <Compile Include="Views\ChildForm\ManageOrders.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\ChildForm\Form4.Designer.cs">
-      <DependentUpon>Form4.cs</DependentUpon>
+    <Compile Include="Views\ChildForm\ManageOrders.Designer.cs">
+      <DependentUpon>ManageOrders.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\ChildForm\Form5.cs">
+    <Compile Include="Views\ChildForm\PlaceOrder.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\ChildForm\Form5.Designer.cs">
-      <DependentUpon>Form5.cs</DependentUpon>
+    <Compile Include="Views\ChildForm\PlaceOrder.Designer.cs">
+      <DependentUpon>PlaceOrder.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\ChildForm\Form6.cs">
+    <Compile Include="Views\ChildForm\GenerateBill.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\ChildForm\Form6.Designer.cs">
-      <DependentUpon>Form6.cs</DependentUpon>
+    <Compile Include="Views\ChildForm\GenerateBill.Designer.cs">
+      <DependentUpon>GenerateBill.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Management_Form.cs">
       <SubType>Form</SubType>
@@ -130,23 +130,23 @@
     <Compile Include="Views\style\RoundedMetroTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <EmbeddedResource Include="Views\ChildForm\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Views\ChildForm\ManageEmployees.resx">
+      <DependentUpon>ManageEmployees.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ChildForm\Form2.resx">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <EmbeddedResource Include="Views\ChildForm\ManageClients.resx">
+      <DependentUpon>ManageClients.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ChildForm\Form3.resx">
-      <DependentUpon>Form3.cs</DependentUpon>
+    <EmbeddedResource Include="Views\ChildForm\ManageProducts.resx">
+      <DependentUpon>ManageProducts.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ChildForm\Form4.resx">
-      <DependentUpon>Form4.cs</DependentUpon>
+    <EmbeddedResource Include="Views\ChildForm\ManageOrders.resx">
+      <DependentUpon>ManageOrders.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ChildForm\Form5.resx">
-      <DependentUpon>Form5.cs</DependentUpon>
+    <EmbeddedResource Include="Views\ChildForm\PlaceOrder.resx">
+      <DependentUpon>PlaceOrder.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ChildForm\Form6.resx">
-      <DependentUpon>Form6.cs</DependentUpon>
+    <EmbeddedResource Include="Views\ChildForm\GenerateBill.resx">
+      <DependentUpon>GenerateBill.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Login_Form.resx">
       <DependentUpon>Login_Form.cs</DependentUpon>
