@@ -27,6 +27,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Management_Form));
             this.menu = new System.Windows.Forms.Panel();
             this.bill_generate = new FontAwesome.Sharp.IconButton();
             this.menu_orders = new FontAwesome.Sharp.IconButton();
@@ -39,14 +40,17 @@
             this.iconChildform = new FontAwesome.Sharp.IconPictureBox();
             this.childFormTitle = new System.Windows.Forms.Label();
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menu.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.title_bar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconChildform)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // menu
             // 
-            this.menu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(214)))), ((int)(((byte)(225)))), ((int)(((byte)(255)))));
+            this.menu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(178)))), ((int)(((byte)(242)))));
             this.menu.Controls.Add(this.bill_generate);
             this.menu.Controls.Add(this.menu_orders);
             this.menu.Controls.Add(this.menu_products);
@@ -62,6 +66,7 @@
             // 
             // bill_generate
             // 
+            this.bill_generate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(178)))), ((int)(((byte)(242)))));
             this.bill_generate.Dock = System.Windows.Forms.DockStyle.Top;
             this.bill_generate.FlatAppearance.BorderSize = 0;
             this.bill_generate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -77,11 +82,12 @@
             this.bill_generate.TabIndex = 6;
             this.bill_generate.Text = "Bill Generator";
             this.bill_generate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.bill_generate.UseVisualStyleBackColor = true;
+            this.bill_generate.UseVisualStyleBackColor = false;
             this.bill_generate.Click += new System.EventHandler(this.bill_generate_Click);
             // 
             // menu_orders
             // 
+            this.menu_orders.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(178)))), ((int)(((byte)(242)))));
             this.menu_orders.Dock = System.Windows.Forms.DockStyle.Top;
             this.menu_orders.FlatAppearance.BorderSize = 0;
             this.menu_orders.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -97,11 +103,12 @@
             this.menu_orders.TabIndex = 5;
             this.menu_orders.Text = "Manage Orders";
             this.menu_orders.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.menu_orders.UseVisualStyleBackColor = true;
+            this.menu_orders.UseVisualStyleBackColor = false;
             this.menu_orders.Click += new System.EventHandler(this.menu_orders_Click);
             // 
             // menu_products
             // 
+            this.menu_products.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(178)))), ((int)(((byte)(242)))));
             this.menu_products.Dock = System.Windows.Forms.DockStyle.Top;
             this.menu_products.FlatAppearance.BorderSize = 0;
             this.menu_products.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -117,11 +124,12 @@
             this.menu_products.TabIndex = 4;
             this.menu_products.Text = "Manage Products";
             this.menu_products.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.menu_products.UseVisualStyleBackColor = true;
+            this.menu_products.UseVisualStyleBackColor = false;
             this.menu_products.Click += new System.EventHandler(this.menu_products_Click);
             // 
             // menu_employ
             // 
+            this.menu_employ.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(178)))), ((int)(((byte)(242)))));
             this.menu_employ.Dock = System.Windows.Forms.DockStyle.Top;
             this.menu_employ.FlatAppearance.BorderSize = 0;
             this.menu_employ.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -137,11 +145,12 @@
             this.menu_employ.TabIndex = 3;
             this.menu_employ.Text = "Manage Employees";
             this.menu_employ.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.menu_employ.UseVisualStyleBackColor = true;
+            this.menu_employ.UseVisualStyleBackColor = false;
             this.menu_employ.Click += new System.EventHandler(this.menu_employ_Click);
             // 
             // menu_clients
             // 
+            this.menu_clients.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(178)))), ((int)(((byte)(242)))));
             this.menu_clients.Dock = System.Windows.Forms.DockStyle.Top;
             this.menu_clients.FlatAppearance.BorderSize = 0;
             this.menu_clients.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -157,11 +166,12 @@
             this.menu_clients.TabIndex = 2;
             this.menu_clients.Text = "Manage Clients";
             this.menu_clients.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.menu_clients.UseVisualStyleBackColor = true;
+            this.menu_clients.UseVisualStyleBackColor = false;
             this.menu_clients.Click += new System.EventHandler(this.menu_clients_Click);
             // 
             // menu_placeorder
             // 
+            this.menu_placeorder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(178)))), ((int)(((byte)(242)))));
             this.menu_placeorder.Dock = System.Windows.Forms.DockStyle.Top;
             this.menu_placeorder.FlatAppearance.BorderSize = 0;
             this.menu_placeorder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -177,11 +187,12 @@
             this.menu_placeorder.TabIndex = 1;
             this.menu_placeorder.Text = "Place Order";
             this.menu_placeorder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.menu_placeorder.UseVisualStyleBackColor = true;
+            this.menu_placeorder.UseVisualStyleBackColor = false;
             this.menu_placeorder.Click += new System.EventHandler(this.menu_placeorder_Click);
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -234,6 +245,16 @@
             this.mainPanel.Size = new System.Drawing.Size(1407, 954);
             this.mainPanel.TabIndex = 2;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(58, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(171, 137);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
             // Management_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -248,9 +269,11 @@
             this.Text = "PiStore Management";
             this.Load += new System.EventHandler(this.Management_Form_Load);
             this.menu.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.title_bar.ResumeLayout(false);
             this.title_bar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconChildform)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -269,5 +292,6 @@
         private System.Windows.Forms.Label childFormTitle;
         private FontAwesome.Sharp.IconPictureBox iconChildform;
         private System.Windows.Forms.Panel mainPanel;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

@@ -34,6 +34,7 @@ namespace pi_store.Views
             leftBorderBtn = new Panel();
             leftBorderBtn.Size = new Size(7, 60);
             menu.Controls.Add(leftBorderBtn);
+            activateBtn(menu_placeorder, leftBorderColor);
         }
 
         private void openChildForm(Form childForm)
