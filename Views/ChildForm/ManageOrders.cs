@@ -16,5 +16,10 @@ namespace pi_store.Views.ChildForm
         {
             InitializeComponent();
         }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }

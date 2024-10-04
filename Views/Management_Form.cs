@@ -35,7 +35,7 @@ namespace pi_store.Views
             leftBorderBtn = new Panel();
             leftBorderBtn.Size = new Size(7, 60);
             menu.Controls.Add(leftBorderBtn);
-            activateBtn(menu_placeorder, leftBorderColor);
+            activateBtn(menu_dashboard, leftBorderColor);
         }
 
         private void openChildForm(Form childForm)
@@ -98,6 +98,7 @@ namespace pi_store.Views
         private void menu_clients_Click(object sender, EventArgs e)
         {
             activateBtn(sender, leftBorderColor);
+            openChildForm(new ManageClients());
         }
 
         private void menu_employ_Click(object sender, EventArgs e)
@@ -109,16 +110,31 @@ namespace pi_store.Views
         private void menu_products_Click(object sender, EventArgs e)
         {
             activateBtn(sender, leftBorderColor);
+            openChildForm(new ManageProducts());
         }
 
         private void menu_orders_Click(object sender, EventArgs e)
         {
             activateBtn(sender, leftBorderColor);
+            openChildForm(new ManageOrders());
         }
 
-        private void bill_generate_Click(object sender, EventArgs e)
+
+        private void menu_placeorder_Click_1(object sender, EventArgs e)
         {
             activateBtn(sender, leftBorderColor);
+        }
+
+        private void menu_placeorder_Click_2(object sender, EventArgs e)
+        {
+            activateBtn(sender, leftBorderColor);
+        }
+
+        private void bill_generate_Click_1(object sender, EventArgs e)
+        {
+            activateBtn(sender, leftBorderColor);
+            openChildForm(new GenerateBill());
+
         }
     }
 }
