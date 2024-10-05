@@ -13,5 +13,8 @@ namespace pi_store.Models
         public string EmployeeID { get; set; }     
         public DateTime OrderDate { get; set; }
         public decimal TotalPrice { get; set; }
+
+        public string ClientName { get; set; }
+        public string EmployeeName { get; set; }
     }
 }

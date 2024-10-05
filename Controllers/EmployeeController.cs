@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using pi_store.DataAccess;
 
 namespace pi_store.Controllers
 {
@@ -40,6 +41,10 @@ namespace pi_store.Controllers
         public void DeleteEmployee(string id)
         {
             employeeDAO.DeleteEmployee(id);
+        }
+
+        public List<Employee> SearchEmployees(string searchString) { 
+            return employeeDAO.SearchEmployees(searchString);
         }
     }
 }
