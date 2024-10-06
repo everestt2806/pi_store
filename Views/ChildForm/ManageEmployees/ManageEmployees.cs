@@ -94,8 +94,8 @@ namespace pi_store.Views.ChildForm
             btnAdd.Enabled = false;
             btnUpdate.Enabled = false;
             btnDelete.Enabled = false;
-            btnSave.Enabled = true;
-            btnCancel.Enabled = true;
+            btnSave.Enabled = false;
+            btnCancel.Enabled = false;
             DisableTextBox(txtID, false);
             DisableTextBox(txtName, false);
             DisableTextBox(txtEmail, false);

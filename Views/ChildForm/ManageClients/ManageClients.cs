@@ -79,24 +79,7 @@ namespace pi_store.Views.ChildForm
                 t.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             }
         }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            option = "add";
-            grd_Client.Enabled = false;
-            ClearText();
-            btnAdd.Enabled = false;
-            btnUpdate.Enabled = false;
-            btnDelete.Enabled = false;
-            btnSave.Enabled = true;
-            btnCancel.Enabled = true;
-            DisableTextBox(txtID, false);
-            DisableTextBox(txtName, false);
-            DisableTextBox(txtEmail, false);
-            DisableTextBox(txtPhone, false);
-            DisableTextBox(txtAddress, false);
-            txtID.Focus();
-        }
+      
         private void ClearText()
         {
             txtID.Clear();
@@ -301,42 +284,38 @@ namespace pi_store.Views.ChildForm
             txtSearch.Focus();
         }
 
-        private void txtSearch_Enter(object sender, EventArgs e)
-        {
-            btnSearch.PerformClick();
-        }
-
-        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btnSearch.PerformClick();
-                e.Handled = true;
-                e.SuppressKeyPress = true;
-            }
-        }
-
         private void ManageClients_Load(object sender, EventArgs e)
         {
             FormLoad();
         }
 
-        private void btnAdd_Click_1(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
             option = "add";
             grd_Client.Enabled = false;
             ClearText();
-            btnAdd.Enabled = false; // Vô hiệu hóa btnAdd
-            btnUpdate.Enabled = false; // Vô hiệu hóa btnUpdate
-            btnDelete.Enabled = false; // Vô hiệu hóa btnDelete
-            btnSave.Enabled = true; // Kích hoạt btnSave
-            btnCancel.Enabled = true; // Kích hoạt btnCancel
+            btnAdd.Enabled = false;
+            btnUpdate.Enabled = false;
+            btnDelete.Enabled = false;
+            btnSave.Enabled = true;
+            btnCancel.Enabled = true;
             DisableTextBox(txtID, false);
             DisableTextBox(txtName, false);
             DisableTextBox(txtEmail, false);
             DisableTextBox(txtPhone, false);
             DisableTextBox(txtAddress, false);
             txtID.Focus();
+        }
+
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnSearch.PerformClick();
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
         }
     }
 
