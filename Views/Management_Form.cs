@@ -13,6 +13,7 @@ using TheArtOfDevHtmlRenderer.Adapters.Entities;
 using Color = System.Drawing.Color;
 using pi_store.Views.ChildForm.ManageClients;
 using pi_store.Views.ChildForm.ManageEmployees;
+using pi_store.Views.ChildForm.ManageProducts;
 
 
 namespace pi_store.Views
@@ -112,7 +113,7 @@ namespace pi_store.Views
         private void menu_products_Click(object sender, EventArgs e)
         {
             activateBtn(sender, leftBorderColor);
-            //openChildForm(new ManageProducts());
+            openChildForm(new ManageProducts());
         }
 
         private void menu_orders_Click(object sender, EventArgs e)

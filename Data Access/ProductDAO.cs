@@ -40,6 +40,33 @@ namespace pi_store.DataAccess
             return products;
         }
 
+        public Product GetProductById(string id)
+        {
+            string query = "SELECT * FROM Product WHERE ID = @ID";
+
+            using (SqlCommand command = new SqlCommand(query, conn.GetConnection()))
+            {
+                command.Parameters.AddWithValue("@ID", id);
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    Product product = new Product
+                    {
+                        ID = reader["ID"].ToString(),
+                        Name = reader["Name"].ToString(),
+                        Description = reader["Description"].ToString(),
+                        Price = Convert.ToDecimal(reader["Price"]),
+                        Quantity = Convert.ToInt32(reader["Quantity"]),
+                    };
+                    reader.Close();
+                    return product;
+                }
+                reader.Close();
+                return null;
+            }
+        }
+
         public void AddProduct(Product product)
         {
             string query = @"INSERT INTO Product (ID, Name, Description, Price, Quantity) 
