@@ -7,12 +7,14 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using Guna.UI2.WinForms;
 using pi_store.Controllers;
 using pi_store.Models;
 
-namespace pi_store.Views.ChildForm
+namespace pi_store.Views.ChildForm.ManageClients
 {
     public partial class ManageClients : Form
     {
@@ -24,6 +26,10 @@ namespace pi_store.Views.ChildForm
             clientController = new ClientController();
         }
 
+        private void ManageClients_Load(object sender, EventArgs e)
+        {
+            FormLoad();
+        }
         private void FormLoad()
         {
             btnAdd.Enabled = true;
@@ -31,8 +37,9 @@ namespace pi_store.Views.ChildForm
             grd_Client.Enabled = true;
             ClearText();
             LoadClient();
-            btnSave.Enabled = false;
+            btnSave1.Enabled = false;
             btnCancel.Enabled = false;
+
             btnUpdate.Enabled = false;
             btnDelete.Enabled = false;
 
@@ -57,13 +64,13 @@ namespace pi_store.Views.ChildForm
                 row.Cells["Name"].Value = client.Name;
                 row.Cells["Email"].Value = client.Email;
                 row.Cells["Phone"].Value = client.Phone;
-                row.Cells["Address"].Value = client.Address;  
+                row.Cells["Address"].Value = client.Address;
             }
         }
 
 
 
-       
+
 
         private void DisableTextBox(Guna2TextBox t, bool b)
         {
@@ -79,7 +86,7 @@ namespace pi_store.Views.ChildForm
                 t.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             }
         }
-      
+
         private void ClearText()
         {
             txtID.Clear();
@@ -153,7 +160,7 @@ namespace pi_store.Views.ChildForm
                     string.IsNullOrWhiteSpace(txtEmail.Text) ||
                     string.IsNullOrWhiteSpace(txtPhone.Text) ||
                     string.IsNullOrWhiteSpace(txtAddress.Text))
-                    
+
                 {
                     MessageBox.Show(this, "Vui lòng điền đầy đủ thông tin.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -203,10 +210,10 @@ namespace pi_store.Views.ChildForm
             }
         }
 
-       
+
         private bool IsValidPhoneNumber(string phoneNumber)
         {
-           
+
             return System.Text.RegularExpressions.Regex.IsMatch(phoneNumber, @"^\d{10,11}$");
         }
 
@@ -221,12 +228,12 @@ namespace pi_store.Views.ChildForm
             btnAdd.Enabled = false;
             btnUpdate.Enabled = false;
             btnDelete.Enabled = false;
-            btnSave.Enabled = true;
+            btnSave1.Enabled = true;
             btnCancel.Enabled = true;
             DisableTextBox(txtID, true);
             DisableTextBox(txtName, false);
             DisableTextBox(txtEmail, false);
-            DisableTextBox(txtPhone, false); 
+            DisableTextBox(txtPhone, false);
             DisableTextBox(txtAddress, false);
             txtName.Focus();
         }
@@ -284,28 +291,7 @@ namespace pi_store.Views.ChildForm
             txtSearch.Focus();
         }
 
-        private void ManageClients_Load(object sender, EventArgs e)
-        {
-            FormLoad();
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            option = "add";
-            grd_Client.Enabled = false;
-            ClearText();
-            btnAdd.Enabled = false;
-            btnUpdate.Enabled = false;
-            btnDelete.Enabled = false;
-            btnSave.Enabled = true;
-            btnCancel.Enabled = true;
-            DisableTextBox(txtID, false);
-            DisableTextBox(txtName, false);
-            DisableTextBox(txtEmail, false);
-            DisableTextBox(txtPhone, false);
-            DisableTextBox(txtAddress, false);
-            txtID.Focus();
-        }
+      
 
         private void txtSearch_KeyDown(object sender, KeyEventArgs e)
         {
@@ -316,6 +302,27 @@ namespace pi_store.Views.ChildForm
                 e.Handled = true;
                 e.SuppressKeyPress = true;
             }
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            option = "add";
+            grd_Client.Enabled = false;
+            ClearText();
+            btnAdd.Enabled = false;
+            Console.WriteLine($"Trạng thái nút Save sau khi nhấn Add: {btnSave1.Enabled}");
+            btnUpdate.Enabled = false;
+            btnDelete.Enabled = false;
+
+            btnSave1.Enabled = true;
+            btnCancel.Enabled = true;
+
+            DisableTextBox(txtID, false);
+            DisableTextBox(txtName, false);
+            DisableTextBox(txtEmail, false);
+            DisableTextBox(txtPhone, false);
+            DisableTextBox(txtAddress, false);
+            txtID.Focus();
         }
     }
 

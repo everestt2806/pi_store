@@ -11,7 +11,7 @@ using Guna.UI2.WinForms;
 using pi_store.Controllers;
 using pi_store.Models;
 
-namespace pi_store.Views.ChildForm
+namespace pi_store.Views.ChildForm.ManageEmployees
 {
     public partial class ManageEmployees : Form
     {
@@ -86,25 +86,6 @@ namespace pi_store.Views.ChildForm
             }
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            option = "add";
-            grd_Employee.Enabled = false;
-            ClearText();
-            btnAdd.Enabled = false;
-            btnUpdate.Enabled = false;
-            btnDelete.Enabled = false;
-            btnSave.Enabled = false;
-            btnCancel.Enabled = false;
-            DisableTextBox(txtID, false);
-            DisableTextBox(txtName, false);
-            DisableTextBox(txtEmail, false);
-            DisableTextBox(txtPhone, false);
-            DisableTextBox(txtSalary, false);
-            DisableTextBox(txtAddress, false);
-            dtHiredate.Enabled = true;
-            txtID.Focus();
-        }
         private void ClearText() {
             txtID.Clear();
             txtName.Clear();
@@ -365,6 +346,30 @@ namespace pi_store.Views.ChildForm
                 e.Handled = true;
                 e.SuppressKeyPress = true; 
             }
+        }
+
+     
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            option = "add";
+            grd_Employee.Enabled = false;
+            ClearText();
+            btnAdd.Enabled = false;
+            btnUpdate.Enabled = false;
+            btnDelete.Enabled = false;
+
+            btnSave.Enabled = true;
+            btnCancel.Enabled = true;
+
+            DisableTextBox(txtID, false);
+            DisableTextBox(txtName, false);
+            DisableTextBox(txtEmail, false);
+            DisableTextBox(txtPhone, false);
+            DisableTextBox(txtAddress, false);
+            DisableTextBox(txtSalary, false);
+            dtHiredate.Enabled = true;
+            txtID.Focus();
         }
     }
 
