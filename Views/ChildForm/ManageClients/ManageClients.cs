@@ -1,15 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.Windows.Forms;
-using System.Xml.Linq;
 using Guna.UI2.WinForms;
 using pi_store.Controllers;
 using pi_store.Models;
@@ -19,7 +12,8 @@ namespace pi_store.Views.ChildForm.ManageClients
     public partial class ManageClients : Form
     {
         private ClientController clientController;
-        private string option = ""; //add to Save Addition changed, Update to save update infor
+        private string option = ""; // add for addition, update for modifying info
+
         public ManageClients()
         {
             InitializeComponent();
@@ -30,6 +24,7 @@ namespace pi_store.Views.ChildForm.ManageClients
         {
             FormLoad();
         }
+
         private void FormLoad()
         {
             btnAdd.Enabled = true;
@@ -39,7 +34,6 @@ namespace pi_store.Views.ChildForm.ManageClients
             LoadClient();
             btnSave1.Enabled = false;
             btnCancel.Enabled = false;
-
             btnUpdate.Enabled = false;
             btnDelete.Enabled = false;
 
@@ -49,17 +43,16 @@ namespace pi_store.Views.ChildForm.ManageClients
             DisableTextBox(txtPhone, true);
             DisableTextBox(txtAddress, true);
         }
+
         private void LoadClient()
         {
             List<Client> clients = clientController.GetAllClients();
-
             grd_Client.Rows.Clear();
 
             foreach (var client in clients)
             {
                 int rowIndex = grd_Client.Rows.Add();
                 DataGridViewRow row = grd_Client.Rows[rowIndex];
-
                 row.Cells["ID"].Value = client.ID;
                 row.Cells["Name"].Value = client.Name;
                 row.Cells["Email"].Value = client.Email;
@@ -68,23 +61,11 @@ namespace pi_store.Views.ChildForm.ManageClients
             }
         }
 
-
-
-
-
-        private void DisableTextBox(Guna2TextBox t, bool b)
+        private void DisableTextBox(Guna2TextBox textBox, bool isDisabled)
         {
-            t.ReadOnly = b;
-            if (b)
-            {
-                t.FillColor = Color.FromArgb(226, 226, 226);
-                t.HoverState.BorderColor = Color.FromArgb(226, 226, 226);
-            }
-            else
-            {
-                t.FillColor = Color.White;
-                t.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            }
+            textBox.ReadOnly = isDisabled;
+            textBox.FillColor = isDisabled ? Color.FromArgb(226, 226, 226) : Color.White;
+            textBox.HoverState.BorderColor = isDisabled ? Color.FromArgb(226, 226, 226) : Color.FromArgb(94, 148, 255);
         }
 
         private void ClearText()
@@ -95,15 +76,7 @@ namespace pi_store.Views.ChildForm.ManageClients
             txtPhone.Clear();
             txtAddress.Clear();
         }
-        private void DisableAllInputField()
-        {
-            DisableTextBox(txtID, false);
-            DisableTextBox(txtName, false);
-            DisableTextBox(txtEmail, false);
-            DisableTextBox(txtPhone, false);
-            DisableTextBox(txtAddress, false);
 
-        }
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearText();
@@ -111,88 +84,62 @@ namespace pi_store.Views.ChildForm.ManageClients
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(txtID.Text) ||
+                string.IsNullOrWhiteSpace(txtName.Text) ||
+                string.IsNullOrWhiteSpace(txtEmail.Text) ||
+                string.IsNullOrWhiteSpace(txtPhone.Text) ||
+                string.IsNullOrWhiteSpace(txtAddress.Text))
+            {
+                MessageBox.Show(this, "Please fill in all fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (!IsValidEmail(txtEmail.Text))
+            {
+                MessageBox.Show(this, "Invalid email address.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (!IsValidPhoneNumber(txtPhone.Text))
+            {
+                MessageBox.Show(this, "Invalid phone number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             if (option.Equals("add"))
             {
-                // Kiểm tra rỗng
-                if (string.IsNullOrWhiteSpace(txtID.Text) ||
-                    string.IsNullOrWhiteSpace(txtName.Text) ||
-                    string.IsNullOrWhiteSpace(txtEmail.Text) ||
-                    string.IsNullOrWhiteSpace(txtPhone.Text) ||
-                    string.IsNullOrWhiteSpace(txtAddress.Text))
-                {
-                    MessageBox.Show(this, "Vui lòng điền đầy đủ thông tin.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                // Kiểm tra định dạng email
-                if (!IsValidEmail(txtEmail.Text))
-                {
-                    MessageBox.Show(this, "Địa chỉ email không hợp lệ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                // Kiểm tra định dạng số điện thoại
-                if (!IsValidPhoneNumber(txtPhone.Text))
-                {
-                    MessageBox.Show(this, "Số điện thoại không hợp lệ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                // Hiển thị hộp thoại xác nhận
-                DialogResult result = MessageBox.Show(this, "Bạn có chắc chắn muốn lưu thông tin khách hàng này?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult result = MessageBox.Show(this, "Are you sure you want to save this client information?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    Client newClient = new Client();
-                    newClient.ID = txtID.Text;
-                    newClient.Name = txtName.Text;
-                    newClient.Email = txtEmail.Text;
-                    newClient.Phone = txtPhone.Text;
-                    newClient.Address = txtAddress.Text;
+                    Client newClient = new Client
+                    {
+                        ID = txtID.Text,
+                        Name = txtName.Text,
+                        Email = txtEmail.Text,
+                        Phone = txtPhone.Text,
+                        Address = txtAddress.Text
+                    };
                     clientController.AddClient(newClient);
                     FormLoad();
-                    MessageBox.Show(this, "Đã lưu thông tin khách hàng thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(this, "Client information saved successfully.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else if (option.Equals("update"))
             {
-                if (string.IsNullOrWhiteSpace(txtID.Text) ||
-                    string.IsNullOrWhiteSpace(txtName.Text) ||
-                    string.IsNullOrWhiteSpace(txtEmail.Text) ||
-                    string.IsNullOrWhiteSpace(txtPhone.Text) ||
-                    string.IsNullOrWhiteSpace(txtAddress.Text))
-
-                {
-                    MessageBox.Show(this, "Vui lòng điền đầy đủ thông tin.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                // Kiểm tra định dạng email
-                if (!IsValidEmail(txtEmail.Text))
-                {
-                    MessageBox.Show(this, "Địa chỉ email không hợp lệ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                // Kiểm tra định dạng số điện thoại
-                if (!IsValidPhoneNumber(txtPhone.Text))
-                {
-                    MessageBox.Show(this, "Số điện thoại không hợp lệ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-
-                DialogResult result = MessageBox.Show(this, "Bạn có chắc chắn muốn cập nhật thông tin khách hàng này?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult result = MessageBox.Show(this, "Are you sure you want to update this client information?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    Client updatedClient = new Client();
-                    updatedClient.ID = txtID.Text;
-                    updatedClient.Name = txtName.Text;
-                    updatedClient.Email = txtEmail.Text;
-                    updatedClient.Phone = txtPhone.Text;
-                    updatedClient.Address = txtAddress.Text;
+                    Client updatedClient = new Client
+                    {
+                        ID = txtID.Text,
+                        Name = txtName.Text,
+                        Email = txtEmail.Text,
+                        Phone = txtPhone.Text,
+                        Address = txtAddress.Text
+                    };
                     clientController.UpdateClient(updatedClient);
                     FormLoad();
-                    MessageBox.Show(this, "Đã cập nhật thông tin khách hàng thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(this, "Client information updated successfully.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -210,10 +157,8 @@ namespace pi_store.Views.ChildForm.ManageClients
             }
         }
 
-
         private bool IsValidPhoneNumber(string phoneNumber)
         {
-
             return System.Text.RegularExpressions.Regex.IsMatch(phoneNumber, @"^\d{10,11}$");
         }
 
@@ -230,6 +175,7 @@ namespace pi_store.Views.ChildForm.ManageClients
             btnDelete.Enabled = false;
             btnSave1.Enabled = true;
             btnCancel.Enabled = true;
+
             DisableTextBox(txtID, true);
             DisableTextBox(txtName, false);
             DisableTextBox(txtEmail, false);
@@ -251,13 +197,13 @@ namespace pi_store.Views.ChildForm.ManageClients
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show(this, "Bạn có chắc chắn muốn xóa khách hàng này?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show(this, "Are you sure you want to delete this client?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
                 string deleteID = grd_Client.CurrentRow.Cells[0].Value.ToString().Trim();
                 clientController.DeleteClient(deleteID);
                 FormLoad();
-                MessageBox.Show(this, "Đã xóa khách hàng thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(this, "Client deleted successfully.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -271,19 +217,12 @@ namespace pi_store.Views.ChildForm.ManageClients
             {
                 int rowIndex = grd_Client.Rows.Add();
                 DataGridViewRow row = grd_Client.Rows[rowIndex];
-
                 row.Cells["ID"].Value = client.ID;
                 row.Cells["Name"].Value = client.Name;
                 row.Cells["Email"].Value = client.Email;
                 row.Cells["Phone"].Value = client.Phone;
                 row.Cells["Address"].Value = client.Address;
             }
-
-        }
-
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            placeholderLabel.Visible = string.IsNullOrEmpty(txtSearch.Text);
         }
 
         private void placeholderLabel_Click(object sender, EventArgs e)
@@ -291,11 +230,8 @@ namespace pi_store.Views.ChildForm.ManageClients
             txtSearch.Focus();
         }
 
-      
-
         private void txtSearch_KeyDown(object sender, KeyEventArgs e)
         {
-
             if (e.KeyCode == Keys.Enter)
             {
                 btnSearch.PerformClick();
@@ -310,10 +246,8 @@ namespace pi_store.Views.ChildForm.ManageClients
             grd_Client.Enabled = false;
             ClearText();
             btnAdd.Enabled = false;
-            Console.WriteLine($"Trạng thái nút Save sau khi nhấn Add: {btnSave1.Enabled}");
             btnUpdate.Enabled = false;
             btnDelete.Enabled = false;
-
             btnSave1.Enabled = true;
             btnCancel.Enabled = true;
 
@@ -324,6 +258,10 @@ namespace pi_store.Views.ChildForm.ManageClients
             DisableTextBox(txtAddress, false);
             txtID.Focus();
         }
-    }
 
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            placeholderLabel.Visible = string.IsNullOrEmpty(txtSearch.Text);
+        }
+    }
 }

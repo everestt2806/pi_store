@@ -17,6 +17,7 @@ namespace pi_store.Views.ChildForm.ManageEmployees
     {
         private EmployeeController employeeController;
         private string option = ""; //add to Save Addition changed, Update to save update infor
+
         public ManageEmployees()
         {
             InitializeComponent();
@@ -43,6 +44,7 @@ namespace pi_store.Views.ChildForm.ManageEmployees
             DisableTextBox(txtAddress, true);
             dtHiredate.Enabled = false;
         }
+
         private void LoadEmployees()
         {
             List<Employee> employees = employeeController.GetAllEmployees();
@@ -64,8 +66,6 @@ namespace pi_store.Views.ChildForm.ManageEmployees
             }
         }
 
-
-
         private void ManageEmployees_Load(object sender, EventArgs e)
         {
             FormLoad();
@@ -86,7 +86,8 @@ namespace pi_store.Views.ChildForm.ManageEmployees
             }
         }
 
-        private void ClearText() {
+        private void ClearText()
+        {
             txtID.Clear();
             txtName.Clear();
             txtEmail.Clear();
@@ -95,6 +96,7 @@ namespace pi_store.Views.ChildForm.ManageEmployees
             txtSalary.Clear();
             dtHiredate.Value = new DateTime(DateTime.Now.Year, 1, 1);
         }
+
         private void DisableAllInputField()
         {
             DisableTextBox(txtID, false);
@@ -104,8 +106,8 @@ namespace pi_store.Views.ChildForm.ManageEmployees
             DisableTextBox(txtSalary, false);
             DisableTextBox(txtAddress, false);
             dtHiredate.Value = new DateTime(DateTime.Now.Year, 1, 1);
-
         }
+
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearText();
@@ -115,49 +117,81 @@ namespace pi_store.Views.ChildForm.ManageEmployees
         {
             if (option.Equals("add"))
             {
-                // Kiểm tra rỗng
-                if (string.IsNullOrWhiteSpace(txtID.Text) ||
-                    string.IsNullOrWhiteSpace(txtName.Text) ||
-                    string.IsNullOrWhiteSpace(txtEmail.Text) ||
-                    string.IsNullOrWhiteSpace(txtPhone.Text) ||
-                    string.IsNullOrWhiteSpace(txtAddress.Text) ||
-                    string.IsNullOrWhiteSpace(txtSalary.Text))
+                if (
+                    string.IsNullOrWhiteSpace(txtID.Text)
+                    || string.IsNullOrWhiteSpace(txtName.Text)
+                    || string.IsNullOrWhiteSpace(txtEmail.Text)
+                    || string.IsNullOrWhiteSpace(txtPhone.Text)
+                    || string.IsNullOrWhiteSpace(txtAddress.Text)
+                    || string.IsNullOrWhiteSpace(txtSalary.Text)
+                )
                 {
-                    MessageBox.Show(this, "Vui lòng điền đầy đủ thông tin.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(
+                        this,
+                        "Please fill in all information.",
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
                     return;
                 }
 
-                // Kiểm tra định dạng email
                 if (!IsValidEmail(txtEmail.Text))
                 {
-                    MessageBox.Show(this, "Địa chỉ email không hợp lệ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(
+                        this,
+                        "Invalid email.",
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
                     return;
                 }
 
-                // Kiểm tra định dạng số điện thoại
                 if (!IsValidPhoneNumber(txtPhone.Text))
                 {
-                    MessageBox.Show(this, "Số điện thoại không hợp lệ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(
+                        this,
+                        "Invalid phone number.",
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
                     return;
                 }
 
-                // Kiểm tra ngày tháng hợp lệ
                 if (dtHiredate.Value > DateTime.Now)
                 {
-                    MessageBox.Show(this, "Ngày thuê không thể là ngày trong tương lai.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(
+                        this,
+                        "HireDate cannot be a future date.",
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
                     return;
                 }
 
-                // Kiểm tra lương hợp lệ
                 decimal salary;
                 if (!decimal.TryParse(txtSalary.Text, out salary) || salary < 0)
                 {
-                    MessageBox.Show(this, "Lương không hợp lệ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(
+                        this,
+                        "Invalid salary.",
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
                     return;
                 }
 
-                // Hiển thị hộp thoại xác nhận
-                DialogResult result = MessageBox.Show(this, "Bạn có chắc chắn muốn lưu thông tin nhân viên này?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult result = MessageBox.Show(
+                    this,
+                    "Are you sure you want to save this employee information?",
+                    "Confirm",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                );
                 if (result == DialogResult.Yes)
                 {
                     Employee newEmployee = new Employee();
@@ -170,51 +204,92 @@ namespace pi_store.Views.ChildForm.ManageEmployees
                     newEmployee.Salary = salary;
                     employeeController.AddEmployee(newEmployee);
                     FormLoad();
-                    MessageBox.Show(this, "Đã lưu thông tin nhân viên thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(
+                        this,
+                        "Employee information added successfully.",
+                        "Notification",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
                 }
             }
-            else if (option.Equals("update")) {
-                if (string.IsNullOrWhiteSpace(txtID.Text) ||
-                    string.IsNullOrWhiteSpace(txtName.Text) ||
-                    string.IsNullOrWhiteSpace(txtEmail.Text) ||
-                    string.IsNullOrWhiteSpace(txtPhone.Text) ||
-                    string.IsNullOrWhiteSpace(txtAddress.Text) ||
-                    string.IsNullOrWhiteSpace(txtSalary.Text))
+            else if (option.Equals("update"))
+            {
+                if (
+                    string.IsNullOrWhiteSpace(txtID.Text)
+                    || string.IsNullOrWhiteSpace(txtName.Text)
+                    || string.IsNullOrWhiteSpace(txtEmail.Text)
+                    || string.IsNullOrWhiteSpace(txtPhone.Text)
+                    || string.IsNullOrWhiteSpace(txtAddress.Text)
+                    || string.IsNullOrWhiteSpace(txtSalary.Text)
+                )
                 {
-                    MessageBox.Show(this, "Vui lòng điền đầy đủ thông tin.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(
+                        this,
+                        "Please fill in all information.",
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
                     return;
                 }
 
-                // Kiểm tra định dạng email
                 if (!IsValidEmail(txtEmail.Text))
                 {
-                    MessageBox.Show(this, "Địa chỉ email không hợp lệ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(
+                        this,
+                        "Invalid email.",
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
                     return;
                 }
 
-                // Kiểm tra định dạng số điện thoại
                 if (!IsValidPhoneNumber(txtPhone.Text))
                 {
-                    MessageBox.Show(this, "Số điện thoại không hợp lệ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(
+                        this,
+                        "Invalid phone number.",
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
                     return;
                 }
 
-                // Kiểm tra ngày tháng hợp lệ
                 if (dtHiredate.Value > DateTime.Now)
                 {
-                    MessageBox.Show(this, "Ngày thuê không thể là ngày trong tương lai.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(
+                        this,
+                        "HireDate cannot be a future date.",
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
                     return;
                 }
 
-                // Kiểm tra lương hợp lệ
                 decimal salary;
                 if (!decimal.TryParse(txtSalary.Text, out salary) || salary < 0)
                 {
-                    MessageBox.Show(this, "Lương không hợp lệ.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(
+                        this,
+                        "Invalid salary.",
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
                     return;
                 }
 
-                DialogResult result = MessageBox.Show(this, "Bạn có chắc chắn muốn cập nhật thông tin nhân viên này?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult result = MessageBox.Show(
+                    this,
+                    "Are you sure you want to update this employee information?",
+                    "Confirm",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                );
                 if (result == DialogResult.Yes)
                 {
                     Employee updatedEmployee = new Employee();
@@ -227,12 +302,17 @@ namespace pi_store.Views.ChildForm.ManageEmployees
                     updatedEmployee.Salary = salary;
                     employeeController.UpdateEmployee(updatedEmployee);
                     FormLoad();
-                    MessageBox.Show(this, "Đã cập nhật thông tin nhân viên thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(
+                        this,
+                        "Employee information updated successfully.",
+                        "Notification",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
                 }
             }
         }
 
-        // Hàm kiểm tra email hợp lệ
         private bool IsValidEmail(string email)
         {
             try
@@ -246,10 +326,8 @@ namespace pi_store.Views.ChildForm.ManageEmployees
             }
         }
 
-        // Hàm kiểm tra số điện thoại hợp lệ
         private bool IsValidPhoneNumber(string phoneNumber)
         {
-            // Đây là một mẫu đơn giản, bạn có thể điều chỉnh theo yêu cầu cụ thể
             return System.Text.RegularExpressions.Regex.IsMatch(phoneNumber, @"^\d{10,11}$");
         }
 
@@ -291,13 +369,25 @@ namespace pi_store.Views.ChildForm.ManageEmployees
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show(this, "Bạn có chắc chắn muốn xóa nhân viên này?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show(
+                this,
+                "Are you sure you want to delete this employee information??",
+                "Confirm",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
             if (result == DialogResult.Yes)
             {
                 string deleteID = grd_Employee.CurrentRow.Cells[0].Value.ToString().Trim();
                 employeeController.DeleteEmployee(deleteID);
                 FormLoad();
-                MessageBox.Show(this, "Đã xóa nhân viên thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(
+                    this,
+                    "Employee information deleted successfully.",
+                    "Notification",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
             }
         }
 
@@ -320,7 +410,6 @@ namespace pi_store.Views.ChildForm.ManageEmployees
                 row.Cells["HireDate"].Value = employee.HireDate.ToString("dd/MM/yyyy");
                 row.Cells["Salary"].Value = employee.Salary.ToString("C2");
             }
-
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
@@ -344,11 +433,9 @@ namespace pi_store.Views.ChildForm.ManageEmployees
             {
                 btnSearch.PerformClick();
                 e.Handled = true;
-                e.SuppressKeyPress = true; 
+                e.SuppressKeyPress = true;
             }
         }
-
-     
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -372,5 +459,4 @@ namespace pi_store.Views.ChildForm.ManageEmployees
             txtID.Focus();
         }
     }
-
-    }
+}
