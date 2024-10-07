@@ -79,6 +79,7 @@
   <ItemGroup>
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Data Access\OrderDAO.cs" />
     <Compile Include="Models\Bill.cs" />
