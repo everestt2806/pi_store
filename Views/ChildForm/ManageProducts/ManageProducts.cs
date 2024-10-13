@@ -55,11 +55,13 @@ namespace pi_store.Views.ChildForm.ManageProducts
 
                 row.Cells["ID"].Value = product.ID;
                 row.Cells["Name"].Value = product.Name;
-                row.Cells["Price"].Value = product.Price;
+                string price = product.Price.ToString("N0") + " VND";
+                row.Cells["Price"].Value = price;
                 row.Cells["Quantity"].Value = product.Quantity;
                 row.Cells["Description"].Value = product.Description;
             }
         }
+
 
         private void ManageProducts_Load(object sender, EventArgs e)
         {
@@ -151,7 +153,7 @@ namespace pi_store.Views.ChildForm.ManageProducts
                     Product newProduct = new Product();
                     newProduct.ID = txtID.Text;
                     newProduct.Name = txtName.Text;
-                    newProduct.Price = Convert.ToDecimal(txtPrice.Text);
+                    newProduct.Price = Convert.ToInt32(txtPrice.Text);
                     newProduct.Quantity = Convert.ToInt32(txtQuantity.Text);
                     newProduct.Description = txtDescription.Text;
                     productController.AddProduct(newProduct);
@@ -210,7 +212,7 @@ namespace pi_store.Views.ChildForm.ManageProducts
                     Product updatedProduct = new Product();
                     updatedProduct.ID = txtID.Text;
                     updatedProduct.Name = txtName.Text;
-                    updatedProduct.Price = Convert.ToDecimal(txtPrice.Text);
+                    updatedProduct.Price = Convert.ToInt32(txtPrice.Text);
                     updatedProduct.Quantity = Convert.ToInt32(txtQuantity.Text);
                     updatedProduct.Description = txtDescription.Text;
                     productController.UpdateProduct(updatedProduct);
@@ -276,7 +278,8 @@ namespace pi_store.Views.ChildForm.ManageProducts
             btnDelete.Enabled = true;
             txtID.Text = grd_Product.CurrentRow.Cells[0].Value.ToString().Trim();
             txtName.Text = grd_Product.CurrentRow.Cells[1].Value.ToString().Trim();
-            txtPrice.Text = grd_Product.CurrentRow.Cells[2].Value.ToString().Trim();
+            string price = grd_Product.CurrentRow.Cells[2].Value.ToString().Replace(" VND", "").Replace(".", "");
+            txtPrice.Text = price.Trim();
             txtQuantity.Text = grd_Product.CurrentRow.Cells[3].Value.ToString().Trim();
             txtDescription.Text = grd_Product.CurrentRow.Cells[4].Value.ToString().Trim();  
         }
@@ -308,19 +311,20 @@ namespace pi_store.Views.ChildForm.ManageProducts
         private void btnSearch_Click(object sender, EventArgs e)
         {
             string searchString = txtSearch.Text.Trim();
-            List<Product> employees = productController.SearchProducts(searchString);
+            List<Product> products = productController.SearchProducts(searchString);
             grd_Product.Rows.Clear();
 
-            foreach (var employee in employees)
+            foreach (var product in products)
             {
                 int rowIndex = grd_Product.Rows.Add();
                 DataGridViewRow row = grd_Product.Rows[rowIndex];
 
-                row.Cells["ID"].Value = employee.ID;
-                row.Cells["Name"].Value = employee.Name;
-                row.Cells["Price"].Value = employee.Price;
-                row.Cells["Quantity"].Value = employee.Quantity;
-                row.Cells["Description"].Value = employee.Description;        
+                row.Cells["ID"].Value = product.ID;
+                row.Cells["Name"].Value = product.Name;
+                string price = product.Price.ToString("N0") + " VND";
+                row.Cells["Price"].Value = price;
+                row.Cells["Quantity"].Value = product.Quantity;
+                row.Cells["Description"].Value = product.Description;        
             }
         }
 

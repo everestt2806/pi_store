@@ -32,6 +32,20 @@ namespace pi_store.Controllers
             orderDAO.AddOrder(order);
         }
 
+        public String GenerateNewOrderID() {
+            return orderDAO.GenerateNewOrderID();
+        }
+
+        public String GenerateNewOrderItemID()
+        {
+            return orderDAO.GenerateNewOrderItemID();
+        }
+
+
+        public void AddOrderItem(OrderItem orderItem)
+        {
+            orderDAO.AddOrderItem(orderItem);
+        }
         public void UpdateOrder(Order order)
         {
             orderDAO.UpdateOrder(order);

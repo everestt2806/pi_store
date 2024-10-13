@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnCancel = new Guna.UI2.WinForms.Guna2Button();
             this.btnSave = new Guna.UI2.WinForms.Guna2Button();
             this.label5 = new System.Windows.Forms.Label();
@@ -51,14 +51,14 @@
             this.btnSearch = new Guna.UI2.WinForms.Guna2Button();
             this.label8 = new System.Windows.Forms.Label();
             this.grd_Product = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.btnUpdate = new Guna.UI2.WinForms.Guna2Button();
+            this.btnAdd = new Guna.UI2.WinForms.Guna2Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnUpdate = new Guna.UI2.WinForms.Guna2Button();
-            this.btnAdd = new Guna.UI2.WinForms.Guna2Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grd_Product)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -160,12 +160,14 @@
             this.txtDescription.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtDescription.Location = new System.Drawing.Point(915, 104);
             this.txtDescription.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtDescription.Multiline = true;
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.PasswordChar = '\0';
             this.txtDescription.PlaceholderText = "";
             this.txtDescription.SelectedText = "";
             this.txtDescription.Size = new System.Drawing.Size(328, 113);
             this.txtDescription.TabIndex = 8;
+            this.txtDescription.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtQuantity
             // 
@@ -363,16 +365,16 @@
             this.grd_Product.AllowUserToAddRows = false;
             this.grd_Product.AllowUserToDeleteRows = false;
             this.grd_Product.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.grd_Product.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grd_Product.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
+            this.grd_Product.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grd_Product.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.grd_Product.ColumnHeadersHeight = 40;
             this.grd_Product.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.grd_Product.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -381,14 +383,14 @@
             this.price,
             this.quantity,
             this.description});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grd_Product.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grd_Product.DefaultCellStyle = dataGridViewCellStyle9;
             this.grd_Product.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.grd_Product.Location = new System.Drawing.Point(33, 78);
             this.grd_Product.Name = "grd_Product";
@@ -420,51 +422,6 @@
             this.grd_Product.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.grd_Product.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.grd_Product.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grd_Product_CellClick);
-            // 
-            // id
-            // 
-            this.id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.id.HeaderText = "ID";
-            this.id.MinimumWidth = 8;
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Width = 150;
-            // 
-            // name
-            // 
-            this.name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.name.HeaderText = "Name";
-            this.name.MinimumWidth = 8;
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            this.name.Width = 300;
-            // 
-            // price
-            // 
-            this.price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.price.HeaderText = "Price";
-            this.price.MinimumWidth = 8;
-            this.price.Name = "price";
-            this.price.ReadOnly = true;
-            this.price.Width = 280;
-            // 
-            // quantity
-            // 
-            this.quantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.quantity.HeaderText = "Quantity";
-            this.quantity.MinimumWidth = 8;
-            this.quantity.Name = "quantity";
-            this.quantity.ReadOnly = true;
-            this.quantity.Width = 150;
-            // 
-            // description
-            // 
-            this.description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.description.HeaderText = "Description";
-            this.description.MinimumWidth = 8;
-            this.description.Name = "description";
-            this.description.ReadOnly = true;
-            this.description.Width = 450;
             // 
             // btnUpdate
             // 
@@ -520,6 +477,51 @@
             this.groupBox1.Size = new System.Drawing.Size(1337, 381);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
+            // 
+            // id
+            // 
+            this.id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.id.HeaderText = "ID";
+            this.id.MinimumWidth = 8;
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Width = 150;
+            // 
+            // name
+            // 
+            this.name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.name.HeaderText = "Name";
+            this.name.MinimumWidth = 8;
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            this.name.Width = 300;
+            // 
+            // price
+            // 
+            this.price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.price.HeaderText = "Price";
+            this.price.MinimumWidth = 8;
+            this.price.Name = "price";
+            this.price.ReadOnly = true;
+            this.price.Width = 150;
+            // 
+            // quantity
+            // 
+            this.quantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.quantity.HeaderText = "Quantity";
+            this.quantity.MinimumWidth = 8;
+            this.quantity.Name = "quantity";
+            this.quantity.ReadOnly = true;
+            this.quantity.Width = 150;
+            // 
+            // description
+            // 
+            this.description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.description.HeaderText = "Description";
+            this.description.MinimumWidth = 8;
+            this.description.Name = "description";
+            this.description.ReadOnly = true;
+            this.description.Width = 600;
             // 
             // ManageProducts
             // 

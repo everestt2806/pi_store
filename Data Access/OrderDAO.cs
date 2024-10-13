@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using pi_store.Services;
 using pi_store.Models;
+using System.Data;
 
 namespace pi_store.DataAccess
 {
@@ -37,7 +38,7 @@ namespace pi_store.DataAccess
                         ClientName = reader["ClientName"].ToString(),
                         EmployeeName = reader["EmployeeName"].ToString(),
                         OrderDate = Convert.ToDateTime(reader["OrderDate"]),
-                        TotalPrice = Convert.ToDecimal(reader["TotalPrice"])
+                        TotalPrice = Convert.ToInt32(reader["TotalPrice"])
                     };
                     orders.Add(order);
                 }
@@ -70,7 +71,7 @@ namespace pi_store.DataAccess
                         ClientID = reader["ClientID"].ToString(),
                         EmployeeID = reader["EmployeeID"].ToString(),
                         OrderDate = Convert.ToDateTime(reader["OrderDate"]),
-                        TotalPrice = Convert.ToDecimal(reader["Address"]),
+                        TotalPrice = Convert.ToInt32(reader["TotalPrice"]),
                         EmployeeName = reader["EmployeeName"].ToString(),
                         ClientName = reader["ClientName"].ToString()
                     };
@@ -85,19 +86,115 @@ namespace pi_store.DataAccess
         public void AddOrder(Order order)
         {
             string query = @"INSERT INTO [Order] (ID, ClientID, EmployeeID, OrderDate, TotalPrice) 
-                             VALUES (@ID, @ClientID, @EmployeeID, @OrderDate, @TotalPrice)";
+                     VALUES (@ID, @ClientID, @EmployeeID, @OrderDate, @TotalPrice)";
 
-            using (SqlCommand command = new SqlCommand(query, conn.GetConnection()))
+            using (SqlConnection connection = conn.GetConnection())
             {
-                command.Parameters.AddWithValue("@ID", order.ID);
-                command.Parameters.AddWithValue("@ClientID", order.ClientID);
-                command.Parameters.AddWithValue("@EmployeeID", order.EmployeeID);
-                command.Parameters.AddWithValue("@OrderDate", order.OrderDate);
-                command.Parameters.AddWithValue("@TotalPrice", order.TotalPrice);
+                connection.Open();
 
-                command.ExecuteNonQuery();
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@ID", order.ID);
+                    command.Parameters.AddWithValue("@ClientID", order.ClientID);
+                    command.Parameters.AddWithValue("@EmployeeID", order.EmployeeID);
+                    command.Parameters.AddWithValue("@OrderDate", order.OrderDate);
+                    command.Parameters.AddWithValue("@TotalPrice", order.TotalPrice);
+
+                    command.ExecuteNonQuery();
+                }
             }
         }
+        public void AddOrderItem(OrderItem orderItem)
+        {
+            string query = @"INSERT INTO OrderItem (ID, OrderID, ProductID, Quantity) 
+                     VALUES (@ID, @OrderID, @ProductID, @Quantity)";
+
+            using (SqlConnection connection = conn.GetConnection())
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@ID", orderItem.ID);
+                    command.Parameters.AddWithValue("@OrderID", orderItem.OrderID);
+                    command.Parameters.AddWithValue("@ProductID", orderItem.ProductID);
+                    command.Parameters.AddWithValue("@Quantity", orderItem.Quantity);
+
+                    command.ExecuteNonQuery();
+                }
+            } 
+        }
+
+
+
+        private static readonly object orderLock = new object();
+        private static readonly object orderItemLock = new object();
+
+        public string GenerateNewOrderID()
+        {
+            lock (orderLock) // Sử dụng lock để đồng bộ truy cập hàm này
+            {
+                string newOrderId = "OD01";
+
+                using (SqlConnection connection = conn.GetConnection())
+                {
+                    if (connection.State != ConnectionState.Open)
+                    {
+                        connection.Open();
+                    }
+
+                    // Get largest OrderID 
+                    string getLastOrderIdQuery = "SELECT TOP 1 ID FROM [Order] ORDER BY ID DESC";
+                    using (SqlCommand getLastOrderIdCmd = new SqlCommand(getLastOrderIdQuery, connection))
+                    {
+                        object result = getLastOrderIdCmd.ExecuteScalar();
+
+                        if (result != null)
+                        {
+                            string lastOrderId = result.ToString();
+                            int lastOrderNumber = int.Parse(lastOrderId.Substring(2));
+                            newOrderId = "OD" + (lastOrderNumber + 1).ToString("D2");
+                        }
+                    }
+                }
+
+                return newOrderId;
+            }
+        }
+
+        public string GenerateNewOrderItemID()
+        {
+            lock (orderItemLock) // Sử dụng lock để đồng bộ truy cập hàm này
+            {
+                string newOrderItemId = "OI01";
+
+                using (SqlConnection connection = conn.GetConnection())
+                {
+                    if (connection.State != ConnectionState.Open)
+                    {
+                        connection.Open();
+                    }
+
+                    // Get largest OrderItemID 
+                    string getLastOrderItemIdQuery = "SELECT TOP 1 ID FROM OrderItem ORDER BY ID DESC";
+                    using (SqlCommand getLastOrderItemIdCmd = new SqlCommand(getLastOrderItemIdQuery, connection))
+                    {
+                        object result = getLastOrderItemIdCmd.ExecuteScalar();
+
+                        if (result != null)
+                        {
+                            string lastOrderItemId = result.ToString();
+                            int lastOrderItemNumber = int.Parse(lastOrderItemId.Substring(2));
+                            newOrderItemId = "OI" + (lastOrderItemNumber + 1).ToString("D2");
+                        }
+                    }
+                }
+
+                return newOrderItemId;
+            }
+        }
+
+
 
         public void UpdateOrder(Order order)
         {
@@ -163,10 +260,10 @@ namespace pi_store.DataAccess
                     Order order = new Order
                     {
                         ID = reader["ID"].ToString(),
-                        ClientName = reader["ClientName"].ToString(), // Thay đổi
-                        EmployeeName = reader["EmployeeName"].ToString(), // Thay đổi
+                        ClientName = reader["ClientName"].ToString(),
+                        EmployeeName = reader["EmployeeName"].ToString(), 
                         OrderDate = Convert.ToDateTime(reader["OrderDate"]),
-                        TotalPrice = Convert.ToDecimal(reader["TotalPrice"])
+                        TotalPrice = Convert.ToInt32(reader["TotalPrice"])
                     };
                     orders.Add(order);
                 }

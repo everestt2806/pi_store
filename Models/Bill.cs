@@ -15,7 +15,7 @@ namespace pi_store.Models
         public string ClientID { get; set; }       
         public string EmployeeID { get; set; }     
         public DateTime BillDate { get; set; }     
-        public decimal TotalPrice { get; set; }    
+        public int TotalPrice { get; set; }    
     }
 
 }

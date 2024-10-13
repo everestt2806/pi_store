@@ -30,7 +30,7 @@ namespace pi_store.DataAccess
                         ID = reader["ID"].ToString(),
                         Name = reader["Name"].ToString(),
                         Description = reader["Description"].ToString(),
-                        Price = Convert.ToDecimal(reader["Price"]),
+                        Price = Convert.ToInt32(reader["Price"]),
                         Quantity = Convert.ToInt32(reader["Quantity"])
                     };
                     products.Add(product);
@@ -38,6 +38,33 @@ namespace pi_store.DataAccess
                 reader.Close();
             }
             return products;
+        }
+
+        public Product GetProductByName(string name)
+        {
+            string query = "SELECT * FROM Product WHERE Name = @Name";
+
+            using (SqlCommand command = new SqlCommand(query, conn.GetConnection()))
+            {
+                command.Parameters.AddWithValue("@Name", name);
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    Product product = new Product
+                    {
+                        ID = reader["ID"].ToString(),
+                        Name = reader["Name"].ToString(),
+                        Description = reader["Description"].ToString(),
+                        Price = Convert.ToInt32(reader["Price"]),
+                        Quantity = Convert.ToInt32(reader["Quantity"]),
+                    };
+                    reader.Close();
+                    return product;
+                }
+                reader.Close();
+                return null;
+            }
         }
 
         public Product GetProductById(string id)
@@ -56,7 +83,7 @@ namespace pi_store.DataAccess
                         ID = reader["ID"].ToString(),
                         Name = reader["Name"].ToString(),
                         Description = reader["Description"].ToString(),
-                        Price = Convert.ToDecimal(reader["Price"]),
+                        Price = Convert.ToInt32(reader["Price"]),
                         Quantity = Convert.ToInt32(reader["Quantity"]),
                     };
                     reader.Close();
@@ -102,16 +129,25 @@ namespace pi_store.DataAccess
             }
         }
 
-        public void DeleteProduct(string id)
+        public void DeleteProduct(string productID)
         {
-            string query = "DELETE FROM Product WHERE ID = @ID";
-
-            using (SqlCommand command = new SqlCommand(query, conn.GetConnection()))
+            using (SqlCommand command = new SqlCommand())
             {
-                command.Parameters.AddWithValue("@ID", id);
+                command.Connection = conn.GetConnection();
+
+                
+                command.CommandText = "DELETE FROM [OrderItem] WHERE ProductID = @ProductID";
+                command.Parameters.AddWithValue("@ProductID", productID);
+                command.ExecuteNonQuery();
+
+                
+                command.CommandText = "DELETE FROM [Product] WHERE ID = @ProductID";
+                command.Parameters.Clear();
+                command.Parameters.AddWithValue("@ProductID", productID);
                 command.ExecuteNonQuery();
             }
         }
+
 
         public List<Product> SearchProducts(string searchTerm)
         {
@@ -130,7 +166,7 @@ namespace pi_store.DataAccess
                         ID = reader["ID"].ToString(),
                         Name = reader["Name"].ToString(),
                         Description = reader["Description"].ToString(),
-                        Price = Convert.ToDecimal(reader["Price"]),
+                        Price = Convert.ToInt32(reader["Price"]),
                         Quantity = Convert.ToInt32(reader["Quantity"])
                     };
                     products.Add(product);

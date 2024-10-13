@@ -28,6 +28,10 @@ namespace pi_store.Controllers
             return productDAO.GetProductById(id);
         }
 
+        public Product GetProductByName(string name) { 
+            return productDAO.GetProductByName(name);
+        }
+
         public void AddProduct(Product product)
         {
             productDAO.AddProduct(product);

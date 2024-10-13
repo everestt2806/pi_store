@@ -37,7 +37,7 @@ namespace pi_store.DataAccess
                         Email = reader["Email"].ToString(),
                         Phone = reader["Phone"].ToString(),
                         Address = reader["Address"].ToString(),
-                        Salary = Convert.ToDecimal(reader["Salary"]),
+                        Salary = Convert.ToInt32(reader["Salary"]),
                         HireDate = Convert.ToDateTime(reader["HireDate"])
                     };
                     employees.Add(employee);
@@ -65,7 +65,7 @@ namespace pi_store.DataAccess
                         Email = reader["Email"].ToString(),
                         Phone = reader["Phone"].ToString(),
                         Address = reader["Address"].ToString(),
-                        Salary = Convert.ToDecimal(reader["Salary"]),
+                        Salary = Convert.ToInt32(reader["Salary"]),
                         HireDate = Convert.ToDateTime(reader["HireDate"])
                     };
                     reader.Close();
@@ -147,7 +147,7 @@ namespace pi_store.DataAccess
                         Phone = reader["Phone"].ToString(),
                         Address = reader["Address"].ToString(),
                         HireDate = Convert.ToDateTime(reader["HireDate"]),
-                        Salary = Convert.ToDecimal(reader["Salary"])
+                        Salary = Convert.ToInt32(reader["Salary"])
                     };
                     employees.Add(employee);
                 }

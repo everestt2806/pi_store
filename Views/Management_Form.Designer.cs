@@ -29,6 +29,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Management_Form));
             this.menu = new System.Windows.Forms.Panel();
+            this.bill_generate = new FontAwesome.Sharp.IconButton();
             this.menu_placeorder = new FontAwesome.Sharp.IconButton();
             this.menu_orders = new FontAwesome.Sharp.IconButton();
             this.menu_products = new FontAwesome.Sharp.IconButton();
@@ -41,7 +42,6 @@
             this.childFormTitle = new System.Windows.Forms.Label();
             this.iconChildform = new FontAwesome.Sharp.IconPictureBox();
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.bill_generate = new FontAwesome.Sharp.IconButton();
             this.menu.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -66,6 +66,27 @@
             this.menu.Size = new System.Drawing.Size(291, 1024);
             this.menu.TabIndex = 0;
             // 
+            // bill_generate
+            // 
+            this.bill_generate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(178)))), ((int)(((byte)(242)))));
+            this.bill_generate.Dock = System.Windows.Forms.DockStyle.Top;
+            this.bill_generate.FlatAppearance.BorderSize = 0;
+            this.bill_generate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bill_generate.Font = new System.Drawing.Font("Segoe UI Black", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bill_generate.IconChar = FontAwesome.Sharp.IconChar.FileInvoice;
+            this.bill_generate.IconColor = System.Drawing.Color.Black;
+            this.bill_generate.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.bill_generate.IconSize = 32;
+            this.bill_generate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bill_generate.Location = new System.Drawing.Point(0, 722);
+            this.bill_generate.Name = "bill_generate";
+            this.bill_generate.Size = new System.Drawing.Size(291, 97);
+            this.bill_generate.TabIndex = 7;
+            this.bill_generate.Text = "Bill Generator";
+            this.bill_generate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.bill_generate.UseVisualStyleBackColor = false;
+            this.bill_generate.Click += new System.EventHandler(this.bill_generate_Click_1);
+            // 
             // menu_placeorder
             // 
             this.menu_placeorder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(178)))), ((int)(((byte)(242)))));
@@ -85,7 +106,7 @@
             this.menu_placeorder.Text = "Place Order";
             this.menu_placeorder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.menu_placeorder.UseVisualStyleBackColor = false;
-            this.menu_placeorder.Click += new System.EventHandler(this.menu_placeorder_Click_2);
+            this.menu_placeorder.Click += new System.EventHandler(this.menu_placeorder_Click);
             // 
             // menu_orders
             // 
@@ -190,7 +211,6 @@
             this.menu_dashboard.Text = "Dashboard";
             this.menu_dashboard.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.menu_dashboard.UseVisualStyleBackColor = false;
-            this.menu_dashboard.Click += new System.EventHandler(this.menu_placeorder_Click_1);
             // 
             // panel1
             // 
@@ -256,27 +276,6 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(1407, 954);
             this.mainPanel.TabIndex = 2;
-            // 
-            // bill_generate
-            // 
-            this.bill_generate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(178)))), ((int)(((byte)(242)))));
-            this.bill_generate.Dock = System.Windows.Forms.DockStyle.Top;
-            this.bill_generate.FlatAppearance.BorderSize = 0;
-            this.bill_generate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bill_generate.Font = new System.Drawing.Font("Segoe UI Black", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bill_generate.IconChar = FontAwesome.Sharp.IconChar.FileInvoice;
-            this.bill_generate.IconColor = System.Drawing.Color.Black;
-            this.bill_generate.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.bill_generate.IconSize = 32;
-            this.bill_generate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bill_generate.Location = new System.Drawing.Point(0, 722);
-            this.bill_generate.Name = "bill_generate";
-            this.bill_generate.Size = new System.Drawing.Size(291, 97);
-            this.bill_generate.TabIndex = 7;
-            this.bill_generate.Text = "Bill Generator";
-            this.bill_generate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.bill_generate.UseVisualStyleBackColor = false;
-            this.bill_generate.Click += new System.EventHandler(this.bill_generate_Click_1);
             // 
             // Management_Form
             // 

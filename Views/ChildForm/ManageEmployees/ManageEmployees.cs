@@ -62,7 +62,8 @@ namespace pi_store.Views.ChildForm.ManageEmployees
                 row.Cells["Phone"].Value = employee.Phone;
                 row.Cells["Address"].Value = employee.Address;
                 row.Cells["HireDate"].Value = employee.HireDate.ToString("dd/MM/yyyy");
-                row.Cells["Salary"].Value = employee.Salary.ToString("C2");
+                string salary = employee.Salary.ToString("N0") + " VND";
+                row.Cells["Salary"].Value = salary;
             }
         }
 
@@ -172,8 +173,8 @@ namespace pi_store.Views.ChildForm.ManageEmployees
                     return;
                 }
 
-                decimal salary;
-                if (!decimal.TryParse(txtSalary.Text, out salary) || salary < 0)
+                int salary;
+                if (!int.TryParse(txtSalary.Text, out salary) || salary < 0)
                 {
                     MessageBox.Show(
                         this,
@@ -270,8 +271,8 @@ namespace pi_store.Views.ChildForm.ManageEmployees
                     return;
                 }
 
-                decimal salary;
-                if (!decimal.TryParse(txtSalary.Text, out salary) || salary < 0)
+                int salary;
+                if (!int.TryParse(txtSalary.Text, out salary) || salary < 0)
                 {
                     MessageBox.Show(
                         this,
@@ -364,7 +365,8 @@ namespace pi_store.Views.ChildForm.ManageEmployees
             txtPhone.Text = grd_Employee.CurrentRow.Cells[3].Value.ToString().Trim();
             txtAddress.Text = grd_Employee.CurrentRow.Cells[4].Value.ToString().Trim();
             dtHiredate.Text = grd_Employee.CurrentRow.Cells[5].Value.ToString().Trim();
-            txtSalary.Text = grd_Employee.CurrentRow.Cells[6].Value.ToString().Trim();
+            string salary = grd_Employee.CurrentRow.Cells[6].Value.ToString().Replace(" VND", "").Replace(".", "");
+            txtSalary.Text = salary;
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -408,7 +410,8 @@ namespace pi_store.Views.ChildForm.ManageEmployees
                 row.Cells["Phone"].Value = employee.Phone;
                 row.Cells["Address"].Value = employee.Address;
                 row.Cells["HireDate"].Value = employee.HireDate.ToString("dd/MM/yyyy");
-                row.Cells["Salary"].Value = employee.Salary.ToString("C2");
+                string salary = employee.Salary.ToString("N0") + " VND";
+                row.Cells["Salary"].Value = salary;
             }
         }
 

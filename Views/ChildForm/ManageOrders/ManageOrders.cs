@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Net.NetworkInformation;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using Guna.UI2.WinForms;
@@ -35,7 +36,7 @@ namespace pi_store.Views.ChildForm.ManageOrders
             grd_Order.Enabled = true;
             ClearText();
             LoadComboboxData();
-            LoadClient();
+            LoadOrder();
             btnSave1.Enabled = false;
             btnCancel.Enabled = false;
             btnUpdate.Enabled = false;
@@ -50,7 +51,7 @@ namespace pi_store.Views.ChildForm.ManageOrders
             dpOrderdate.Enabled = false;
         }
 
-        private void LoadClient()
+        private void LoadOrder()
         {
             List<Order> orders = orderController.GetAllOrders();
             grd_Order.Rows.Clear();
@@ -65,7 +66,8 @@ namespace pi_store.Views.ChildForm.ManageOrders
                 row.Cells["employee_id"].Value = order.EmployeeID;
                 row.Cells["employee_name"].Value = order.EmployeeName;
                 row.Cells["orderdate"].Value = order.OrderDate;
-                row.Cells["total_price"].Value = order.TotalPrice;
+                string totalPrice = order.TotalPrice.ToString("N0") + " VND";
+                row.Cells["total_price"].Value = totalPrice;
             }
         }
 
@@ -107,7 +109,7 @@ namespace pi_store.Views.ChildForm.ManageOrders
                         EmployeeID = cbEmployeeID.SelectedValue.ToString(),
                         EmployeeName = cbEmployeeName.Text,
                         OrderDate = dpOrderdate.Value,
-                        TotalPrice = Convert.ToDecimal(txtTotalPrice.Text)
+                        TotalPrice = Convert.ToInt32(txtTotalPrice.Text)
                     };
 
                     orderController.UpdateOrder(updatedOrder);
@@ -147,7 +149,8 @@ namespace pi_store.Views.ChildForm.ManageOrders
             cbEmployeeID.Text = grd_Order.CurrentRow.Cells[3].Value.ToString().Trim();
             cbEmployeeName.Text = grd_Order.CurrentRow.Cells[4].Value.ToString().Trim();
             dpOrderdate.Text = grd_Order.CurrentRow.Cells[5].Value.ToString().Trim();
-            txtTotalPrice.Text = grd_Order.CurrentRow.Cells[6].Value.ToString().Trim();
+            string total = grd_Order.CurrentRow.Cells[6].Value.ToString().Replace(" VND", "").Replace(".", "");
+            txtTotalPrice.Text = total.Trim();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -178,7 +181,8 @@ namespace pi_store.Views.ChildForm.ManageOrders
                 row.Cells["employee_id"].Value = order.EmployeeID;
                 row.Cells["employee_name"].Value = order.EmployeeName;
                 row.Cells["orderdate"].Value = order.OrderDate;
-                row.Cells["total_price"].Value = order.TotalPrice;
+                string totalPrice = order.TotalPrice.ToString("N0") + " VND";
+                row.Cells["total_price"].Value = totalPrice;
             }
         }
 

@@ -15,6 +15,7 @@ using pi_store.Views.ChildForm.ManageClients;
 using pi_store.Views.ChildForm.ManageEmployees;
 using pi_store.Views.ChildForm.ManageProducts;
 using pi_store.Views.ChildForm.ManageOrders;
+using pi_store.Views.ChildForm.PlaceOrder;
 
 
 namespace pi_store.Views
@@ -94,10 +95,7 @@ namespace pi_store.Views
             }
         }
 
-        private void menu_placeorder_Click(object sender, EventArgs e)
-        {
-            activateBtn(sender, leftBorderColor);
-        }
+       
 
         private void menu_clients_Click(object sender, EventArgs e)
         {
@@ -124,21 +122,18 @@ namespace pi_store.Views
         }
 
 
-        private void menu_placeorder_Click_1(object sender, EventArgs e)
-        {
-            activateBtn(sender, leftBorderColor);
-        }
-
-        private void menu_placeorder_Click_2(object sender, EventArgs e)
-        {
-            activateBtn(sender, leftBorderColor);
-        }
-
         private void bill_generate_Click_1(object sender, EventArgs e)
         {
             activateBtn(sender, leftBorderColor);
             //openChildForm(new GenerateBill());
 
         }
+
+        private void menu_placeorder_Click(object sender, EventArgs e)
+        {
+            activateBtn(sender, leftBorderColor);
+            openChildForm(new PlaceOrder());
+        }
+        
     }
 }

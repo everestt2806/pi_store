@@ -13,7 +13,7 @@ namespace pi_store.Services
 
         public DBConnection()
         {
-            string connectionString = "Data Source=SONEVERST;Initial Catalog=PiStore;Integrated Security=True;";
+            string connectionString = "Data Source=SonEverst;Initial Catalog=PiStore;Integrated Security=True;";
             connection = new SqlConnection(connectionString);
         }
 
