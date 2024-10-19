@@ -77,13 +77,11 @@ namespace pi_store.DataAccess
         }
 
         public void AddEmployee(Employee employee)
-        {
-            string query = @"INSERT INTO Employee (ID, Name, Email, Phone, Address, Salary, HireDate) 
-                         VALUES (@ID, @Name, @Email, @Phone, @Address, @Salary, @HireDate)";
+        {  
 
-            using (SqlCommand command = new SqlCommand(query, conn.GetConnection()))
+            using (SqlCommand command = new SqlCommand("sp_AddEmployee", conn.GetConnection()))
             {
-                command.Parameters.AddWithValue("@ID", employee.ID);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@Name", employee.Name);
                 command.Parameters.AddWithValue("@Email", employee.Email);
                 command.Parameters.AddWithValue("@Phone", employee.Phone);

@@ -118,9 +118,7 @@ namespace pi_store.Views.ChildForm.ManageEmployees
         {
             if (option.Equals("add"))
             {
-                if (
-                    string.IsNullOrWhiteSpace(txtID.Text)
-                    || string.IsNullOrWhiteSpace(txtName.Text)
+                if ( string.IsNullOrWhiteSpace(txtName.Text)
                     || string.IsNullOrWhiteSpace(txtEmail.Text)
                     || string.IsNullOrWhiteSpace(txtPhone.Text)
                     || string.IsNullOrWhiteSpace(txtAddress.Text)
@@ -196,7 +194,6 @@ namespace pi_store.Views.ChildForm.ManageEmployees
                 if (result == DialogResult.Yes)
                 {
                     Employee newEmployee = new Employee();
-                    newEmployee.ID = txtID.Text;
                     newEmployee.Name = txtName.Text;
                     newEmployee.Email = txtEmail.Text;
                     newEmployee.Phone = txtPhone.Text;
@@ -217,8 +214,7 @@ namespace pi_store.Views.ChildForm.ManageEmployees
             else if (option.Equals("update"))
             {
                 if (
-                    string.IsNullOrWhiteSpace(txtID.Text)
-                    || string.IsNullOrWhiteSpace(txtName.Text)
+                     string.IsNullOrWhiteSpace(txtName.Text)
                     || string.IsNullOrWhiteSpace(txtEmail.Text)
                     || string.IsNullOrWhiteSpace(txtPhone.Text)
                     || string.IsNullOrWhiteSpace(txtAddress.Text)
@@ -294,7 +290,6 @@ namespace pi_store.Views.ChildForm.ManageEmployees
                 if (result == DialogResult.Yes)
                 {
                     Employee updatedEmployee = new Employee();
-                    updatedEmployee.ID = txtID.Text;
                     updatedEmployee.Name = txtName.Text;
                     updatedEmployee.Email = txtEmail.Text;
                     updatedEmployee.Phone = txtPhone.Text;
@@ -452,14 +447,14 @@ namespace pi_store.Views.ChildForm.ManageEmployees
             btnSave.Enabled = true;
             btnCancel.Enabled = true;
 
-            DisableTextBox(txtID, false);
+            DisableTextBox(txtID, true);
             DisableTextBox(txtName, false);
             DisableTextBox(txtEmail, false);
             DisableTextBox(txtPhone, false);
             DisableTextBox(txtAddress, false);
             DisableTextBox(txtSalary, false);
             dtHiredate.Enabled = true;
-            txtID.Focus();
+            txtName.Focus();
         }
     }
 }

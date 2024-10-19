@@ -84,7 +84,7 @@ namespace pi_store.Views.ChildForm.ManageClients
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtID.Text) ||
+            if (
                 string.IsNullOrWhiteSpace(txtName.Text) ||
                 string.IsNullOrWhiteSpace(txtEmail.Text) ||
                 string.IsNullOrWhiteSpace(txtPhone.Text) ||
@@ -112,8 +112,7 @@ namespace pi_store.Views.ChildForm.ManageClients
                 if (result == DialogResult.Yes)
                 {
                     Client newClient = new Client
-                    {
-                        ID = txtID.Text,
+                    {   
                         Name = txtName.Text,
                         Email = txtEmail.Text,
                         Phone = txtPhone.Text,
@@ -131,7 +130,6 @@ namespace pi_store.Views.ChildForm.ManageClients
                 {
                     Client updatedClient = new Client
                     {
-                        ID = txtID.Text,
                         Name = txtName.Text,
                         Email = txtEmail.Text,
                         Phone = txtPhone.Text,
@@ -251,12 +249,12 @@ namespace pi_store.Views.ChildForm.ManageClients
             btnSave1.Enabled = true;
             btnCancel.Enabled = true;
 
-            DisableTextBox(txtID, false);
+            DisableTextBox(txtID, true);
             DisableTextBox(txtName, false);
             DisableTextBox(txtEmail, false);
             DisableTextBox(txtPhone, false);
             DisableTextBox(txtAddress, false);
-            txtID.Focus();
+            txtName.Focus();
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)

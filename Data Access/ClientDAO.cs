@@ -68,20 +68,22 @@ namespace pi_store.DataAccess
         }
         public void AddClient(Client client)
         {
-            string query = @"INSERT INTO Client (ID, Name, Email, Phone, Address) 
-                             VALUES (@ID, @Name, @Email, @Phone, @Address)";
-
-            using (SqlCommand command = new SqlCommand(query, conn.GetConnection()))
+            using (SqlCommand command = new SqlCommand("sp_AddClient", conn.GetConnection()))
             {
-                command.Parameters.AddWithValue("@ID", client.ID);
+                // Đặt kiểu command là StoredProcedure
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                // Thêm các tham số cho stored procedure
                 command.Parameters.AddWithValue("@Name", client.Name);
                 command.Parameters.AddWithValue("@Email", client.Email);
                 command.Parameters.AddWithValue("@Phone", client.Phone);
                 command.Parameters.AddWithValue("@Address", client.Address);
 
+                // Thực thi stored procedure
                 command.ExecuteNonQuery();
             }
         }
+
 
         public void UpdateClient(Client client)
         {

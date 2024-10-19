@@ -113,4 +113,150 @@ VALUES
 ('OI1009', 'OD1005', 'PD1004', 2),
 ('OI1010', 'OD1005', 'PD1005', 1);
 
-select * from Client
+
+-- Create Stored Procedure
+
+CREATE PROCEDURE sp_AddClient
+    @Name NVARCHAR(100),
+    @Email NVARCHAR(100), 
+    @Phone NVARCHAR(20),
+    @Address NVARCHAR(200)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        DECLARE @NewID NVARCHAR(10)
+        
+        BEGIN TRANSACTION
+            -- Tạo ID mới với format CLxxxx
+            SELECT @NewID = 'CL' + RIGHT('0000' + 
+                CAST(COALESCE(MAX(CAST(SUBSTRING(ID, 3, 4) AS INT)), 0) + 1 AS NVARCHAR(4)), 4)
+            FROM Client WITH (TABLOCKX);
+
+            INSERT INTO Client (ID, Name, Email, Phone, Address)
+            VALUES (@NewID, @Name, @Email, @Phone, @Address);
+        COMMIT TRANSACTION
+
+        SELECT @NewID AS NewClientID;
+    END TRY
+    BEGIN CATCH
+        IF @@TRANCOUNT > 0
+            ROLLBACK TRANSACTION;
+        THROW;
+    END CATCH
+END
+
+GO
+
+CREATE PROCEDURE sp_AddEmployee
+    @Name NVARCHAR(100),
+    @Email NVARCHAR(100),
+    @Phone NVARCHAR(20),
+    @Address NVARCHAR(200),
+    @Salary DECIMAL(18,2),
+    @HireDate DATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        BEGIN TRANSACTION
+            DECLARE @NewID NVARCHAR(10)
+            SELECT @NewID = 'EP' + RIGHT('0000' + 
+                CAST(COALESCE(MAX(CAST(SUBSTRING(ID, 3, 4) AS INT)), 0) + 1 AS NVARCHAR(4)), 4)
+            FROM Employee WITH (TABLOCKX);
+
+            INSERT INTO Employee (ID, Name, Email, Phone, Address, Salary, HireDate)
+            VALUES (@NewID, @Name, @Email, @Phone, @Address, @Salary, @HireDate);
+        COMMIT TRANSACTION
+        SELECT @NewID AS NewEmployeeID;
+    END TRY
+    BEGIN CATCH
+        IF @@TRANCOUNT > 0
+            ROLLBACK TRANSACTION;
+        THROW;
+    END CATCH
+END
+GO
+
+CREATE PROCEDURE sp_AddProduct
+    @Name NVARCHAR(100),
+    @Description NVARCHAR(255),
+    @Price DECIMAL(18,2),
+    @Quantity INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        BEGIN TRANSACTION
+            DECLARE @NewID NVARCHAR(10)
+            SELECT @NewID = 'PD' + RIGHT('0000' + 
+                CAST(COALESCE(MAX(CAST(SUBSTRING(ID, 3, 4) AS INT)), 0) + 1 AS NVARCHAR(4)), 4)
+            FROM Product WITH (TABLOCKX);
+
+            INSERT INTO Product (ID, Name, Description, Price, Quantity)
+            VALUES (@NewID, @Name, @Description, @Price, @Quantity);
+        COMMIT TRANSACTION
+        SELECT @NewID AS NewProductID;
+    END TRY
+    BEGIN CATCH
+        IF @@TRANCOUNT > 0
+            ROLLBACK TRANSACTION;
+        THROW;
+    END CATCH
+END
+GO
+
+CREATE PROCEDURE sp_AddOrder
+    @ClientID NVARCHAR(10),
+    @EmployeeID NVARCHAR(10),
+    @OrderDate DATETIME,
+    @TotalPrice DECIMAL(18,2)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        BEGIN TRANSACTION
+            DECLARE @NewID NVARCHAR(10)
+            SELECT @NewID = 'OD' + RIGHT('0000' + 
+                CAST(COALESCE(MAX(CAST(SUBSTRING(ID, 3, 4) AS INT)), 0) + 1 AS NVARCHAR(4)), 4)
+            FROM [Order] WITH (TABLOCKX);
+
+            INSERT INTO [Order] (ID, ClientID, EmployeeID, OrderDate, TotalPrice)
+            VALUES (@NewID, @ClientID, @EmployeeID, @OrderDate, @TotalPrice);
+        COMMIT TRANSACTION
+        SELECT @NewID AS NewOrderID;
+    END TRY
+    BEGIN CATCH
+        IF @@TRANCOUNT > 0
+            ROLLBACK TRANSACTION;
+        THROW;
+    END CATCH
+END
+GO
+
+CREATE PROCEDURE sp_AddOrderItem
+    @OrderID NVARCHAR(10),
+    @ProductID NVARCHAR(10),
+    @Quantity INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    BEGIN TRY
+        BEGIN TRANSACTION
+            DECLARE @NewID NVARCHAR(10)
+            SELECT @NewID = 'OI' + RIGHT('0000' + 
+                CAST(COALESCE(MAX(CAST(SUBSTRING(ID, 3, 4) AS INT)), 0) + 1 AS NVARCHAR(4)), 4)
+            FROM OrderItem WITH (TABLOCKX);
+
+            INSERT INTO OrderItem (ID, OrderID, ProductID, Quantity)
+            VALUES (@NewID, @OrderID, @ProductID, @Quantity);
+        COMMIT TRANSACTION
+        SELECT @NewID AS NewOrderItemID;
+    END TRY
+    BEGIN CATCH
+        IF @@TRANCOUNT > 0
+            ROLLBACK TRANSACTION;
+        THROW;
+    END CATCH
+END
+GO
