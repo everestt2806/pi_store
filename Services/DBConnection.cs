@@ -1,37 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace pi_store.Services
 {
     public class DBConnection
     {
-        private SqlConnection connection;
+        private readonly string connectionString;
 
         public DBConnection()
         {
-            string connectionString = "Data Source=SonEverst;Initial Catalog=PiStore;Integrated Security=True;";
-            connection = new SqlConnection(connectionString);
+            connectionString = "Data Source=SonEverst;Initial Catalog=PiStore;Integrated Security=True;";
         }
 
         public SqlConnection GetConnection()
         {
-            if (connection.State != System.Data.ConnectionState.Open)
+            var connection = new SqlConnection(connectionString);
+            if (connection.State != ConnectionState.Open)
             {
-                connection.Open();
+                try
+                {
+                    connection.Open();
+                }
+                catch (SqlException ex)
+                {
+                    throw new Exception($"Failed to open database connection: {ex.Message}");
+                }
             }
             return connection;
-        }
-
-        public void CloseConnection()
-        {
-            if (connection.State != System.Data.ConnectionState.Closed)
-            {
-                connection.Close();
-            }
         }
     }
 }

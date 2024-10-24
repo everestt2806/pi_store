@@ -1,5 +1,4 @@
-﻿using Guna.UI2.WinForms;
-using pi_store.Controllers;
+﻿using pi_store.Controllers;
 using pi_store.Models;
 using System;
 using System.Collections.Generic;
@@ -25,21 +24,21 @@ namespace pi_store.Views.ChildForm.ManageProducts
 
         private void FormLoad()
         {
-            btnAdd.Enabled = true;
+            EnableButtonCustom(btnAdd, true);
             grd_Product.ClearSelection();
             grd_Product.Enabled = true;
             ClearText();
             LoadProducts();
-            btnSave.Enabled = false;
-            btnCancel.Enabled = false;
-            btnUpdate.Enabled = false;
-            btnDelete.Enabled = false;
+            EnableButtonCustom(btnSave, false);
+            EnableButtonCustom(btnCancel, false);
+            EnableButtonCustom(btnUpdate, false);
+            EnableButtonCustom(btnDelete, false);
 
-            DisableTextBox(txtID, true);
-            DisableTextBox(txtName, true);
-            DisableTextBox(txtPrice, true);
-            DisableTextBox(txtQuantity, true);
-            DisableTextBox(txtDescription, true);
+            txtID.Enabled = false;
+            txtName.Enabled = false;
+            txtPrice.Enabled = false;
+            txtQuantity.Enabled = false;
+            txtDescription.Enabled = false;
         }
 
         private void LoadProducts()
@@ -68,21 +67,6 @@ namespace pi_store.Views.ChildForm.ManageProducts
             FormLoad();
         }
 
-        private void DisableTextBox(Guna2TextBox t, bool b)
-        {
-            t.ReadOnly = b;
-            if (b)
-            {
-                t.FillColor = Color.FromArgb(226, 226, 226);
-                t.HoverState.BorderColor = Color.FromArgb(226, 226, 226);
-            }
-            else
-            {
-                t.FillColor = Color.White;
-                t.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            }
-        }
-
         private void ClearText()
         {
             txtID.Clear();
@@ -92,14 +76,33 @@ namespace pi_store.Views.ChildForm.ManageProducts
             txtDescription.Clear();   
         }
 
-        private void DisableAllInputField()
+        private void EnableButtonCustom(Button btn, bool opt)
         {
-            DisableTextBox(txtID, false);
-            DisableTextBox(txtName, false);
-            DisableTextBox(txtPrice, false);
-            DisableTextBox(txtQuantity, false);
-            DisableTextBox(txtDescription, false);
+            if (!opt)
+            {
+                btn.BackColor = Color.FromArgb(169, 169, 169);
+                btn.Enabled = false;
+
+            }
+            else
+            {
+                btn.Enabled = true;
+
+                if (btn.Name.Equals("btnSave"))
+                {
+                    btn.BackColor = Color.ForestGreen;
+                }
+                else if (btn.Name.Equals("btnCancel"))
+                {
+                    btn.BackColor = Color.DarkRed;
+                }
+                else
+                {
+                    btn.BackColor = Color.FromArgb(94, 148, 255);
+                }
+            }
         }
+      
 
         private void btnClear_Click(object sender, EventArgs e)
         {
@@ -111,11 +114,10 @@ namespace pi_store.Views.ChildForm.ManageProducts
             if (option.Equals("add"))
             {
                 if (
-                    string.IsNullOrWhiteSpace(txtID.Text)
-                    || string.IsNullOrWhiteSpace(txtName.Text)
+                    string.IsNullOrWhiteSpace(txtName.Text)
                     || string.IsNullOrWhiteSpace(txtPrice.Text)
                     || string.IsNullOrWhiteSpace(txtQuantity.Text)
-                    || string.IsNullOrWhiteSpace(txtDescription.Text)    
+                    || string.IsNullOrWhiteSpace(txtDescription.Text)
                 )
                 {
                     MessageBox.Show(
@@ -128,8 +130,9 @@ namespace pi_store.Views.ChildForm.ManageProducts
                     return;
                 }
 
-                decimal price;
-                if (!decimal.TryParse(txtPrice.Text, out price) || price < 0)
+                
+                int price;
+                if (!int.TryParse(txtPrice.Text, out price) || price < 0)
                 {
                     MessageBox.Show(
                         this,
@@ -141,6 +144,21 @@ namespace pi_store.Views.ChildForm.ManageProducts
                     return;
                 }
 
+                
+                int quantity;
+                if (!int.TryParse(txtQuantity.Text, out quantity) || quantity < 0)
+                {
+                    MessageBox.Show(
+                        this,
+                        "Invalid quantity.",
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
+                    return;
+                }
+
+                
                 DialogResult result = MessageBox.Show(
                     this,
                     "Are you sure you want to add new product?",
@@ -151,10 +169,9 @@ namespace pi_store.Views.ChildForm.ManageProducts
                 if (result == DialogResult.Yes)
                 {
                     Product newProduct = new Product();
-                    newProduct.ID = txtID.Text;
                     newProduct.Name = txtName.Text;
-                    newProduct.Price = Convert.ToInt32(txtPrice.Text);
-                    newProduct.Quantity = Convert.ToInt32(txtQuantity.Text);
+                    newProduct.Price = price; 
+                    newProduct.Quantity = quantity;
                     newProduct.Description = txtDescription.Text;
                     productController.AddProduct(newProduct);
                     FormLoad();
@@ -167,6 +184,7 @@ namespace pi_store.Views.ChildForm.ManageProducts
                     );
                 }
             }
+
             else if (option.Equals("update"))
             {
                 if (
@@ -242,46 +260,69 @@ namespace pi_store.Views.ChildForm.ManageProducts
             option = "add";
             grd_Product.Enabled = false;
             ClearText();
-            btnAdd.Enabled = false;
-            btnUpdate.Enabled = false;
-            btnDelete.Enabled = false;
+            EnableButtonCustom(btnAdd, false);
+            EnableButtonCustom(btnUpdate, false);
+            EnableButtonCustom(btnDelete, false);
 
-            btnSave.Enabled = true;
-            btnCancel.Enabled = true;
+            EnableButtonCustom(btnSave, true);
+            EnableButtonCustom(btnCancel, true);
 
-            DisableTextBox(txtID, false);
-            DisableTextBox(txtName, false);
-            DisableTextBox(txtPrice, false);
-            DisableTextBox(txtQuantity, false);
-            DisableTextBox(txtDescription, false); 
-            txtID.Focus();
+            txtID.Enabled = false;
+            txtName.Enabled = true;
+            txtPrice.Enabled = true;
+            txtQuantity.Enabled = true;
+            txtDescription.Enabled = true;
+            txtName.Focus();
         }
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             option = "update";
-            btnAdd.Enabled = false;
-            btnUpdate.Enabled = false;
-            btnDelete.Enabled = false;
-            btnSave.Enabled = true;
-            btnCancel.Enabled = true;
-            DisableTextBox(txtID, true);
-            DisableTextBox(txtName, false);
-            DisableTextBox(txtPrice, false);
-            DisableTextBox(txtQuantity, false);
-            DisableTextBox(txtDescription, false);
+            grd_Product.Enabled = false;
+            EnableButtonCustom(btnAdd, false);
+            EnableButtonCustom(btnUpdate, false);
+            EnableButtonCustom(btnDelete, false);
+            EnableButtonCustom(btnSave, true); 
+            EnableButtonCustom(btnCancel, true);
+            txtID.Enabled = false;
+            txtName.Enabled = true;
+            txtPrice.Enabled = true;
+            txtQuantity.Enabled = true;
+            txtDescription.Enabled = true;
             txtName.Focus();
         }
 
         private void grd_Product_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            btnUpdate.Enabled = true;
-            btnDelete.Enabled = true;
-            txtID.Text = grd_Product.CurrentRow.Cells[0].Value.ToString().Trim();
-            txtName.Text = grd_Product.CurrentRow.Cells[1].Value.ToString().Trim();
-            string price = grd_Product.CurrentRow.Cells[2].Value.ToString().Replace(" VND", "").Replace(".", "");
-            txtPrice.Text = price.Trim();
-            txtQuantity.Text = grd_Product.CurrentRow.Cells[3].Value.ToString().Trim();
-            txtDescription.Text = grd_Product.CurrentRow.Cells[4].Value.ToString().Trim();  
+            if (e.RowIndex < 0 || grd_Product.Rows.Count == 0) return;
+            if (grd_Product.CurrentRow == null) return;
+
+            try
+            {
+                EnableButtonCustom(btnUpdate, true);
+                EnableButtonCustom(btnDelete, true);
+
+                txtID.Text = grd_Product.CurrentRow.Cells[0].Value?.ToString().Trim() ?? "";
+                txtName.Text = grd_Product.CurrentRow.Cells[1].Value?.ToString().Trim() ?? "";
+
+                string price = grd_Product.CurrentRow.Cells[2].Value?.ToString() ?? "0";
+                if (!string.IsNullOrEmpty(price))
+                {
+                    price = price.Replace(" VND", "").Replace(".", "").Trim();
+                    txtPrice.Text = price;
+                }
+                else
+                {
+                    txtPrice.Text = "0";
+                }
+
+                txtQuantity.Text = grd_Product.CurrentRow.Cells[3].Value?.ToString().Trim() ?? "0";
+                txtDescription.Text = grd_Product.CurrentRow.Cells[4].Value?.ToString().Trim() ?? "";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+               
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -331,8 +372,26 @@ namespace pi_store.Views.ChildForm.ManageProducts
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             placeholderLabel.Visible = string.IsNullOrEmpty(txtSearch.Text);
-        }
 
+            if (string.IsNullOrEmpty(txtSearch.Text))
+            {
+
+                List<Product> products = productController.GetAllProducts();
+                grd_Product.Rows.Clear();
+
+                foreach (var product in products)
+                {
+                    int rowIndex = grd_Product.Rows.Add();
+                    DataGridViewRow row = grd_Product.Rows[rowIndex];
+                    row.Cells["ID"].Value = product.ID;
+                    row.Cells["Name"].Value = product.Name;
+                    string price = product.Price.ToString("N0") + " VND";
+                    row.Cells["Price"].Value = price;
+                    row.Cells["Quantity"].Value = product.Quantity;
+                    row.Cells["Description"].Value = product.Description;
+                }
+            }
+        }
         private void placeholderLabel_Click(object sender, EventArgs e)
         {
             txtSearch.Focus();

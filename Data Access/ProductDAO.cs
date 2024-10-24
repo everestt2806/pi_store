@@ -96,12 +96,12 @@ namespace pi_store.DataAccess
 
         public void AddProduct(Product product)
         {
-            string query = @"INSERT INTO Product (ID, Name, Description, Price, Quantity) 
-                             VALUES (@ID, @Name, @Description, @Price, @Quantity)";
 
-            using (SqlCommand command = new SqlCommand(query, conn.GetConnection()))
+            using (SqlCommand command = new SqlCommand("sp_AddProduct", conn.GetConnection()))
             {
-                command.Parameters.AddWithValue("@ID", product.ID);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+              
                 command.Parameters.AddWithValue("@Name", product.Name);
                 command.Parameters.AddWithValue("@Description", product.Description);
                 command.Parameters.AddWithValue("@Price", product.Price);

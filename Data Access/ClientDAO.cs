@@ -70,16 +70,16 @@ namespace pi_store.DataAccess
         {
             using (SqlCommand command = new SqlCommand("sp_AddClient", conn.GetConnection()))
             {
-                // Đặt kiểu command là StoredProcedure
+             
                 command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                // Thêm các tham số cho stored procedure
+               
                 command.Parameters.AddWithValue("@Name", client.Name);
                 command.Parameters.AddWithValue("@Email", client.Email);
                 command.Parameters.AddWithValue("@Phone", client.Phone);
                 command.Parameters.AddWithValue("@Address", client.Address);
 
-                // Thực thi stored procedure
+               
                 command.ExecuteNonQuery();
             }
         }

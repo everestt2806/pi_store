@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Guna.UI2.WinForms;
 using pi_store.Controllers;
 using pi_store.Models;
 
@@ -26,22 +25,22 @@ namespace pi_store.Views.ChildForm.ManageEmployees
 
         private void FormLoad()
         {
-            btnAdd.Enabled = true;
+            EnableButtonCustom(btnAdd, true);
             grd_Employee.ClearSelection();
             grd_Employee.Enabled = true;
             ClearText();
             LoadEmployees();
-            btnSave.Enabled = false;
-            btnCancel.Enabled = false;
-            btnUpdate.Enabled = false;
-            btnDelete.Enabled = false;
+            EnableButtonCustom(btnSave, false);
+            EnableButtonCustom(btnCancel, false);
+            EnableButtonCustom(btnUpdate, false);
+            EnableButtonCustom(btnDelete, false);
 
-            DisableTextBox(txtID, true);
-            DisableTextBox(txtName, true);
-            DisableTextBox(txtEmail, true);
-            DisableTextBox(txtPhone, true);
-            DisableTextBox(txtSalary, true);
-            DisableTextBox(txtAddress, true);
+            txtID.Enabled = false;
+            txtName.Enabled = false;
+            txtEmail.Enabled = false;
+            txtPhone.Enabled = false;
+            txtSalary.Enabled = false;
+            txtAddress.Enabled = false;
             dtHiredate.Enabled = false;
         }
 
@@ -72,20 +71,33 @@ namespace pi_store.Views.ChildForm.ManageEmployees
             FormLoad();
         }
 
-        private void DisableTextBox(Guna2TextBox t, bool b)
+        private void EnableButtonCustom(Button btn, bool opt)
         {
-            t.ReadOnly = b;
-            if (b)
+            if (!opt)
             {
-                t.FillColor = Color.FromArgb(226, 226, 226);
-                t.HoverState.BorderColor = Color.FromArgb(226, 226, 226);
+                btn.BackColor = Color.FromArgb(169, 169, 169);
+                btn.Enabled = false;
+
             }
             else
             {
-                t.FillColor = Color.White;
-                t.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+                btn.Enabled = true;
+
+                if (btn.Name.Equals("btnSave"))
+                {
+                    btn.BackColor = Color.ForestGreen;
+                }
+                else if (btn.Name.Equals("btnCancel"))
+                {
+                    btn.BackColor = Color.DarkRed;
+                }
+                else
+                {
+                    btn.BackColor = Color.FromArgb(94, 148, 255);
+                }
             }
         }
+
 
         private void ClearText()
         {
@@ -100,12 +112,12 @@ namespace pi_store.Views.ChildForm.ManageEmployees
 
         private void DisableAllInputField()
         {
-            DisableTextBox(txtID, false);
-            DisableTextBox(txtName, false);
-            DisableTextBox(txtEmail, false);
-            DisableTextBox(txtPhone, false);
-            DisableTextBox(txtSalary, false);
-            DisableTextBox(txtAddress, false);
+            txtID.Enabled = false;
+            txtName.Enabled = false;
+            txtEmail.Enabled = false;
+            txtPhone.Enabled = false;
+            txtSalary.Enabled = false;
+            txtAddress.Enabled = false;
             dtHiredate.Value = new DateTime(DateTime.Now.Year, 1, 1);
         }
 
@@ -290,6 +302,7 @@ namespace pi_store.Views.ChildForm.ManageEmployees
                 if (result == DialogResult.Yes)
                 {
                     Employee updatedEmployee = new Employee();
+                    updatedEmployee.ID = txtID.Text;
                     updatedEmployee.Name = txtName.Text;
                     updatedEmployee.Email = txtEmail.Text;
                     updatedEmployee.Phone = txtPhone.Text;
@@ -335,33 +348,54 @@ namespace pi_store.Views.ChildForm.ManageEmployees
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             option = "update";
-            btnAdd.Enabled = false;
-            btnUpdate.Enabled = false;
-            btnDelete.Enabled = false;
-            btnSave.Enabled = true;
-            btnCancel.Enabled = true;
-            DisableTextBox(txtID, true);
-            DisableTextBox(txtName, false);
-            DisableTextBox(txtEmail, false);
-            DisableTextBox(txtPhone, false);
-            DisableTextBox(txtSalary, false);
-            DisableTextBox(txtAddress, false);
-            dtHiredate.Enabled = true;
+            grd_Employee.Enabled = false;
+            EnableButtonCustom(btnAdd, false);
+            EnableButtonCustom(btnUpdate, false);
+            EnableButtonCustom(btnDelete, false);
+            EnableButtonCustom(btnSave, true);
+            EnableButtonCustom(btnCancel, true);
+            txtID.Enabled = false;
+            txtName.Enabled = true;
+            txtEmail.Enabled = true;
+            txtPhone.Enabled = true;
+            txtSalary.Enabled = true;
+            txtAddress.Enabled = true;
+            dtHiredate.Enabled = false;
             txtName.Focus();
         }
 
         private void grd_Employee_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            btnUpdate.Enabled = true;
-            btnDelete.Enabled = true;
-            txtID.Text = grd_Employee.CurrentRow.Cells[0].Value.ToString().Trim();
-            txtName.Text = grd_Employee.CurrentRow.Cells[1].Value.ToString().Trim();
-            txtEmail.Text = grd_Employee.CurrentRow.Cells[2].Value.ToString().Trim();
-            txtPhone.Text = grd_Employee.CurrentRow.Cells[3].Value.ToString().Trim();
-            txtAddress.Text = grd_Employee.CurrentRow.Cells[4].Value.ToString().Trim();
-            dtHiredate.Text = grd_Employee.CurrentRow.Cells[5].Value.ToString().Trim();
-            string salary = grd_Employee.CurrentRow.Cells[6].Value.ToString().Replace(" VND", "").Replace(".", "");
-            txtSalary.Text = salary;
+            if (e.RowIndex < 0 || grd_Employee.Rows.Count == 0) return;
+            if (grd_Employee.CurrentRow == null) return;
+
+            try
+            {
+                EnableButtonCustom(btnUpdate, true);
+                EnableButtonCustom(btnDelete, true);
+
+                txtID.Text = grd_Employee.CurrentRow.Cells[0].Value?.ToString().Trim() ?? "";
+                txtName.Text = grd_Employee.CurrentRow.Cells[1].Value?.ToString().Trim() ?? "";
+                txtEmail.Text = grd_Employee.CurrentRow.Cells[2].Value?.ToString().Trim() ?? "";
+                txtPhone.Text = grd_Employee.CurrentRow.Cells[3].Value?.ToString().Trim() ?? "";
+                txtAddress.Text = grd_Employee.CurrentRow.Cells[4].Value?.ToString().Trim() ?? "";
+                dtHiredate.Text = grd_Employee.CurrentRow.Cells[5].Value?.ToString().Trim() ?? "";
+
+                string salary = grd_Employee.CurrentRow.Cells[6].Value?.ToString() ?? "0";
+                if (!string.IsNullOrEmpty(salary))
+                {
+                    salary = salary.Replace(" VND", "").Replace(".", "").Trim();
+                    txtSalary.Text = salary;
+                }
+                else
+                {
+                    txtSalary.Text = "0";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);            
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -413,6 +447,25 @@ namespace pi_store.Views.ChildForm.ManageEmployees
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             placeholderLabel.Visible = string.IsNullOrEmpty(txtSearch.Text);
+
+            if (string.IsNullOrEmpty(txtSearch.Text)) 
+            {
+                
+                List<Employee> employees = employeeController.GetAllEmployees(); 
+                grd_Employee.Rows.Clear();
+
+                foreach (var employee in employees)
+                {
+                    int rowIndex = grd_Employee.Rows.Add();
+                    DataGridViewRow row = grd_Employee.Rows[rowIndex];
+                    row.Cells["ID"].Value = employee.ID;
+                    row.Cells["Name"].Value = employee.Name;
+                    row.Cells["Email"].Value = employee.Email;
+                    row.Cells["Phone"].Value = employee.Phone;
+                    row.Cells["Address"].Value = employee.Address;
+                    row.Cells["HireDate"].Value = employee.HireDate.ToString("dd/MM/yyyy");
+                }
+            }
         }
 
         private void placeholderLabel_Click(object sender, EventArgs e)
@@ -440,20 +493,21 @@ namespace pi_store.Views.ChildForm.ManageEmployees
             option = "add";
             grd_Employee.Enabled = false;
             ClearText();
-            btnAdd.Enabled = false;
-            btnUpdate.Enabled = false;
-            btnDelete.Enabled = false;
+            EnableButtonCustom(btnAdd, false);
+            EnableButtonCustom(btnUpdate, false);
+            EnableButtonCustom(btnDelete, false);
 
-            btnSave.Enabled = true;
-            btnCancel.Enabled = true;
+            EnableButtonCustom(btnSave, true);
+            EnableButtonCustom(btnCancel, true);
 
-            DisableTextBox(txtID, true);
-            DisableTextBox(txtName, false);
-            DisableTextBox(txtEmail, false);
-            DisableTextBox(txtPhone, false);
-            DisableTextBox(txtAddress, false);
-            DisableTextBox(txtSalary, false);
-            dtHiredate.Enabled = true;
+            txtID.Enabled = false;
+            txtName.Enabled = true;
+            txtEmail.Enabled = true;
+            txtPhone.Enabled = true;
+            txtAddress.Enabled = true;
+            txtSalary.Enabled = true;
+            dtHiredate.Enabled = false;
+            dtHiredate.Value = DateTime.Now;
             txtName.Focus();
         }
     }

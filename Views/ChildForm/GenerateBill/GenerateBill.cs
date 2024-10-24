@@ -16,5 +16,17 @@ namespace pi_store.Views.ChildForm
         {
             InitializeComponent();
         }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // GenerateBill
+            // 
+            this.ClientSize = new System.Drawing.Size(1227, 798);
+            this.Name = "GenerateBill";
+            this.ResumeLayout(false);
+
+        }
     }
 }

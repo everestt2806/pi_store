@@ -28,25 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.btnCancel = new Guna.UI2.WinForms.Guna2Button();
-            this.btnSave1 = new Guna.UI2.WinForms.Guna2Button();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtOrderID = new Guna.UI2.WinForms.Guna2TextBox();
-            this.btnClear = new Guna.UI2.WinForms.Guna2Button();
-            this.btnDelete = new Guna.UI2.WinForms.Guna2Button();
-            this.txtSearch = new Guna.UI2.WinForms.Guna2TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.placeholderLabel = new System.Windows.Forms.Label();
-            this.btnSearch = new Guna.UI2.WinForms.Guna2Button();
-            this.label8 = new System.Windows.Forms.Label();
-            this.grd_Order = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.grd_Order = new System.Windows.Forms.DataGridView();
             this.order_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.client_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.client_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,52 +48,26 @@
             this.employee_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.orderdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.total_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnUpdate = new Guna.UI2.WinForms.Guna2Button();
+            this.label8 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.txtTotalPrice = new System.Windows.Forms.TextBox();
+            this.txtOrderID = new System.Windows.Forms.TextBox();
             this.cbEmployeeName = new System.Windows.Forms.ComboBox();
             this.cbEmployeeID = new System.Windows.Forms.ComboBox();
             this.cbClientName = new System.Windows.Forms.ComboBox();
             this.cbClientID = new System.Windows.Forms.ComboBox();
-            this.dpOrderdate = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtTotalPrice = new Guna.UI2.WinForms.Guna2TextBox();
+            this.dpOrderdate = new System.Windows.Forms.DateTimePicker();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grd_Order)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnCancel.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnCancel.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnCancel.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnCancel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(714, 286);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(180, 45);
-            this.btnCancel.TabIndex = 21;
-            this.btnCancel.Text = "CANCEL";
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // btnSave1
-            // 
-            this.btnSave1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnSave1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnSave1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnSave1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnSave1.FillColor = System.Drawing.Color.DarkGreen;
-            this.btnSave1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.btnSave1.ForeColor = System.Drawing.Color.White;
-            this.btnSave1.Location = new System.Drawing.Point(474, 286);
-            this.btnSave1.Name = "btnSave1";
-            this.btnSave1.Size = new System.Drawing.Size(180, 45);
-            this.btnSave1.TabIndex = 20;
-            this.btnSave1.Text = "SAVE";
-            this.btnSave1.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // label5
             // 
@@ -151,94 +119,31 @@
             this.label1.TabIndex = 10;
             this.label1.Text = "Order ID";
             // 
-            // txtOrderID
-            // 
-            this.txtOrderID.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtOrderID.DefaultText = "";
-            this.txtOrderID.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtOrderID.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtOrderID.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtOrderID.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtOrderID.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtOrderID.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
-            this.txtOrderID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtOrderID.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtOrderID.Location = new System.Drawing.Point(202, 32);
-            this.txtOrderID.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtOrderID.Name = "txtOrderID";
-            this.txtOrderID.Padding = new System.Windows.Forms.Padding(5);
-            this.txtOrderID.PasswordChar = '\0';
-            this.txtOrderID.PlaceholderText = "";
-            this.txtOrderID.SelectedText = "";
-            this.txtOrderID.Size = new System.Drawing.Size(166, 40);
-            this.txtOrderID.TabIndex = 4;
-            // 
-            // btnClear
-            // 
-            this.btnClear.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnClear.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnClear.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnClear.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnClear.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnClear.ForeColor = System.Drawing.Color.White;
-            this.btnClear.Location = new System.Drawing.Point(1096, 317);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(180, 45);
-            this.btnClear.TabIndex = 3;
-            this.btnClear.Text = "Clear";
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnDelete.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnDelete.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnDelete.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnDelete.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnDelete.ForeColor = System.Drawing.Color.White;
-            this.btnDelete.Location = new System.Drawing.Point(1096, 245);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(180, 45);
-            this.btnDelete.TabIndex = 2;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // txtSearch
-            // 
-            this.txtSearch.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtSearch.DefaultText = "";
-            this.txtSearch.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtSearch.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtSearch.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtSearch.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtSearch.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtSearch.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtSearch.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtSearch.Location = new System.Drawing.Point(785, 24);
-            this.txtSearch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.PasswordChar = '\0';
-            this.txtSearch.PlaceholderForeColor = System.Drawing.Color.Silver;
-            this.txtSearch.PlaceholderText = "";
-            this.txtSearch.SelectedText = "";
-            this.txtSearch.Size = new System.Drawing.Size(328, 40);
-            this.txtSearch.TabIndex = 22;
-            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
-            this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
-            // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnSearch);
             this.groupBox2.Controls.Add(this.placeholderLabel);
             this.groupBox2.Controls.Add(this.txtSearch);
-            this.groupBox2.Controls.Add(this.btnSearch);
-            this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.grd_Order);
+            this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Location = new System.Drawing.Point(39, 425);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(1339, 499);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.btnSearch.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearch.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnSearch.Location = new System.Drawing.Point(1120, 22);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(188, 40);
+            this.btnSearch.TabIndex = 36;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // placeholderLabel
             // 
@@ -247,27 +152,144 @@
             this.placeholderLabel.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.placeholderLabel.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.placeholderLabel.ForeColor = System.Drawing.SystemColors.ActiveBorder;
-            this.placeholderLabel.Location = new System.Drawing.Point(833, 29);
+            this.placeholderLabel.Location = new System.Drawing.Point(833, 26);
             this.placeholderLabel.Name = "placeholderLabel";
             this.placeholderLabel.Size = new System.Drawing.Size(219, 28);
-            this.placeholderLabel.TabIndex = 23;
+            this.placeholderLabel.TabIndex = 34;
             this.placeholderLabel.Text = "Search by ID or Name";
             this.placeholderLabel.Click += new System.EventHandler(this.placeholderLabel_Click);
             // 
-            // btnSearch
+            // txtSearch
             // 
-            this.btnSearch.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnSearch.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnSearch.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnSearch.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnSearch.ForeColor = System.Drawing.Color.White;
-            this.btnSearch.Location = new System.Drawing.Point(1127, 24);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(180, 40);
-            this.btnSearch.TabIndex = 21;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            this.txtSearch.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtSearch.BackColor = System.Drawing.SystemColors.Window;
+            this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSearch.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearch.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.txtSearch.Location = new System.Drawing.Point(781, 23);
+            this.txtSearch.Multiline = true;
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(328, 35);
+            this.txtSearch.TabIndex = 35;
+            this.txtSearch.WordWrap = false;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
+            // 
+            // grd_Order
+            // 
+            this.grd_Order.AllowUserToAddRows = false;
+            this.grd_Order.AllowUserToDeleteRows = false;
+            this.grd_Order.AllowUserToResizeRows = false;
+            this.grd_Order.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.grd_Order.BackgroundColor = System.Drawing.Color.White;
+            this.grd_Order.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.grd_Order.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grd_Order.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.grd_Order.ColumnHeadersHeight = 40;
+            this.grd_Order.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.order_id,
+            this.client_id,
+            this.client_name,
+            this.employee_id,
+            this.employee_name,
+            this.orderdate,
+            this.total_price});
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grd_Order.DefaultCellStyle = dataGridViewCellStyle5;
+            this.grd_Order.EnableHeadersVisualStyles = false;
+            this.grd_Order.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.grd_Order.Location = new System.Drawing.Point(33, 78);
+            this.grd_Order.Name = "grd_Order";
+            this.grd_Order.ReadOnly = true;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.ButtonShadow;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grd_Order.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.grd_Order.RowHeadersVisible = false;
+            this.grd_Order.RowHeadersWidth = 62;
+            this.grd_Order.RowTemplate.Height = 28;
+            this.grd_Order.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.grd_Order.Size = new System.Drawing.Size(1274, 397);
+            this.grd_Order.TabIndex = 33;
+            this.grd_Order.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grd_Order_CellClick);
+            // 
+            // order_id
+            // 
+            this.order_id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.order_id.HeaderText = "Order ID";
+            this.order_id.MinimumWidth = 8;
+            this.order_id.Name = "order_id";
+            this.order_id.ReadOnly = true;
+            this.order_id.Width = 150;
+            // 
+            // client_id
+            // 
+            this.client_id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.client_id.HeaderText = "Client ID";
+            this.client_id.MinimumWidth = 8;
+            this.client_id.Name = "client_id";
+            this.client_id.ReadOnly = true;
+            this.client_id.Width = 150;
+            // 
+            // client_name
+            // 
+            this.client_name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.client_name.HeaderText = "Client Name";
+            this.client_name.MinimumWidth = 8;
+            this.client_name.Name = "client_name";
+            this.client_name.ReadOnly = true;
+            this.client_name.Width = 230;
+            // 
+            // employee_id
+            // 
+            this.employee_id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.employee_id.HeaderText = "Employee ID";
+            this.employee_id.MinimumWidth = 8;
+            this.employee_id.Name = "employee_id";
+            this.employee_id.ReadOnly = true;
+            this.employee_id.Width = 120;
+            // 
+            // employee_name
+            // 
+            this.employee_name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.employee_name.HeaderText = "Employee Name";
+            this.employee_name.MinimumWidth = 8;
+            this.employee_name.Name = "employee_name";
+            this.employee_name.ReadOnly = true;
+            this.employee_name.Width = 230;
+            // 
+            // orderdate
+            // 
+            this.orderdate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.orderdate.HeaderText = "Order Date";
+            this.orderdate.MinimumWidth = 8;
+            this.orderdate.Name = "orderdate";
+            this.orderdate.ReadOnly = true;
+            this.orderdate.Width = 200;
+            // 
+            // total_price
+            // 
+            this.total_price.HeaderText = "Total Price";
+            this.total_price.MinimumWidth = 8;
+            this.total_price.Name = "total_price";
+            this.total_price.ReadOnly = true;
             // 
             // label8
             // 
@@ -279,170 +301,126 @@
             this.label8.TabIndex = 14;
             this.label8.Text = "Order\'s Data";
             // 
-            // grd_Order
-            // 
-            this.grd_Order.AllowUserToAddRows = false;
-            this.grd_Order.AllowUserToDeleteRows = false;
-            this.grd_Order.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.grd_Order.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grd_Order.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.grd_Order.ColumnHeadersHeight = 40;
-            this.grd_Order.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            this.grd_Order.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.order_id,
-            this.client_id,
-            this.client_name,
-            this.employee_id,
-            this.employee_name,
-            this.orderdate,
-            this.total_price});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grd_Order.DefaultCellStyle = dataGridViewCellStyle3;
-            this.grd_Order.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.grd_Order.Location = new System.Drawing.Point(33, 78);
-            this.grd_Order.Name = "grd_Order";
-            this.grd_Order.ReadOnly = true;
-            this.grd_Order.RowHeadersVisible = false;
-            this.grd_Order.RowHeadersWidth = 62;
-            this.grd_Order.RowTemplate.Height = 28;
-            this.grd_Order.Size = new System.Drawing.Size(1274, 397);
-            this.grd_Order.TabIndex = 0;
-            this.grd_Order.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
-            this.grd_Order.ThemeStyle.AlternatingRowsStyle.Font = null;
-            this.grd_Order.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
-            this.grd_Order.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
-            this.grd_Order.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
-            this.grd_Order.ThemeStyle.BackColor = System.Drawing.Color.White;
-            this.grd_Order.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.grd_Order.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            this.grd_Order.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.grd_Order.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grd_Order.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
-            this.grd_Order.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            this.grd_Order.ThemeStyle.HeaderStyle.Height = 40;
-            this.grd_Order.ThemeStyle.ReadOnly = true;
-            this.grd_Order.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
-            this.grd_Order.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.grd_Order.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grd_Order.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            this.grd_Order.ThemeStyle.RowsStyle.Height = 28;
-            this.grd_Order.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.grd_Order.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            this.grd_Order.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grd_Order_CellClick);
-            // 
-            // order_id
-            // 
-            this.order_id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.order_id.HeaderText = "Order ID";
-            this.order_id.MinimumWidth = 8;
-            this.order_id.Name = "order_id";
-            this.order_id.ReadOnly = true;
-            this.order_id.Width = 120;
-            // 
-            // client_id
-            // 
-            this.client_id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.client_id.HeaderText = "Client ID";
-            this.client_id.MinimumWidth = 8;
-            this.client_id.Name = "client_id";
-            this.client_id.ReadOnly = true;
-            this.client_id.Width = 200;
-            // 
-            // client_name
-            // 
-            this.client_name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.client_name.HeaderText = "Client Name";
-            this.client_name.MinimumWidth = 8;
-            this.client_name.Name = "client_name";
-            this.client_name.ReadOnly = true;
-            this.client_name.Width = 200;
-            // 
-            // employee_id
-            // 
-            this.employee_id.HeaderText = "Employee ID";
-            this.employee_id.MinimumWidth = 8;
-            this.employee_id.Name = "employee_id";
-            this.employee_id.ReadOnly = true;
-            // 
-            // employee_name
-            // 
-            this.employee_name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.employee_name.HeaderText = "Employee Name";
-            this.employee_name.MinimumWidth = 8;
-            this.employee_name.Name = "employee_name";
-            this.employee_name.ReadOnly = true;
-            this.employee_name.Width = 200;
-            // 
-            // orderdate
-            // 
-            this.orderdate.HeaderText = "Order Date";
-            this.orderdate.MinimumWidth = 8;
-            this.orderdate.Name = "orderdate";
-            this.orderdate.ReadOnly = true;
-            // 
-            // total_price
-            // 
-            this.total_price.HeaderText = "Total Price";
-            this.total_price.MinimumWidth = 8;
-            this.total_price.Name = "total_price";
-            this.total_price.ReadOnly = true;
-            // 
-            // btnUpdate
-            // 
-            this.btnUpdate.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnUpdate.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnUpdate.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnUpdate.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnUpdate.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnUpdate.ForeColor = System.Drawing.Color.White;
-            this.btnUpdate.Location = new System.Drawing.Point(135, 286);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(180, 45);
-            this.btnUpdate.TabIndex = 1;
-            this.btnUpdate.Text = "Update";
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
-            // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.dpOrderdate);
+            this.groupBox1.Controls.Add(this.btnCancel);
+            this.groupBox1.Controls.Add(this.btnSave);
+            this.groupBox1.Controls.Add(this.btnClear);
+            this.groupBox1.Controls.Add(this.btnDelete);
+            this.groupBox1.Controls.Add(this.btnUpdate);
+            this.groupBox1.Controls.Add(this.txtTotalPrice);
+            this.groupBox1.Controls.Add(this.txtOrderID);
             this.groupBox1.Controls.Add(this.cbEmployeeName);
             this.groupBox1.Controls.Add(this.cbEmployeeID);
             this.groupBox1.Controls.Add(this.cbClientName);
             this.groupBox1.Controls.Add(this.cbClientID);
-            this.groupBox1.Controls.Add(this.dpOrderdate);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.txtTotalPrice);
-            this.groupBox1.Controls.Add(this.btnCancel);
-            this.groupBox1.Controls.Add(this.btnSave1);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.txtOrderID);
-            this.groupBox1.Controls.Add(this.btnClear);
-            this.groupBox1.Controls.Add(this.btnDelete);
-            this.groupBox1.Controls.Add(this.btnUpdate);
             this.groupBox1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.groupBox1.Location = new System.Drawing.Point(41, 31);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(1337, 381);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.BackColor = System.Drawing.Color.DarkRed;
+            this.btnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnCancel.Location = new System.Drawing.Point(690, 289);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(188, 54);
+            this.btnCancel.TabIndex = 38;
+            this.btnCancel.Text = "CANCEL";
+            this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.BackColor = System.Drawing.Color.ForestGreen;
+            this.btnSave.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnSave.Location = new System.Drawing.Point(465, 289);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(188, 54);
+            this.btnSave.TabIndex = 37;
+            this.btnSave.Text = "SAVE";
+            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnClear
+            // 
+            this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.btnClear.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClear.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnClear.Location = new System.Drawing.Point(1073, 311);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(188, 54);
+            this.btnClear.TabIndex = 36;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.btnDelete.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnDelete.Location = new System.Drawing.Point(1073, 239);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(188, 54);
+            this.btnDelete.TabIndex = 35;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.btnUpdate.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdate.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnUpdate.Location = new System.Drawing.Point(107, 289);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(188, 54);
+            this.btnUpdate.TabIndex = 34;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.UseVisualStyleBackColor = false;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
+            // txtTotalPrice
+            // 
+            this.txtTotalPrice.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtTotalPrice.BackColor = System.Drawing.SystemColors.Window;
+            this.txtTotalPrice.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTotalPrice.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTotalPrice.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.txtTotalPrice.Location = new System.Drawing.Point(915, 177);
+            this.txtTotalPrice.Multiline = true;
+            this.txtTotalPrice.Name = "txtTotalPrice";
+            this.txtTotalPrice.Size = new System.Drawing.Size(234, 35);
+            this.txtTotalPrice.TabIndex = 32;
+            this.txtTotalPrice.WordWrap = false;
+            // 
+            // txtOrderID
+            // 
+            this.txtOrderID.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtOrderID.BackColor = System.Drawing.SystemColors.Window;
+            this.txtOrderID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtOrderID.Font = new System.Drawing.Font("Segoe UI Semibold", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtOrderID.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.txtOrderID.Location = new System.Drawing.Point(202, 39);
+            this.txtOrderID.Multiline = true;
+            this.txtOrderID.Name = "txtOrderID";
+            this.txtOrderID.Size = new System.Drawing.Size(166, 35);
+            this.txtOrderID.TabIndex = 31;
+            this.txtOrderID.WordWrap = false;
             // 
             // cbEmployeeName
             // 
@@ -488,22 +466,6 @@
             this.cbClientID.TabIndex = 27;
             this.cbClientID.SelectedIndexChanged += new System.EventHandler(this.cbClientID_SelectedIndexChanged);
             // 
-            // dpOrderdate
-            // 
-            this.dpOrderdate.BackColor = System.Drawing.Color.Transparent;
-            this.dpOrderdate.Checked = true;
-            this.dpOrderdate.CustomFormat = "dd/MM/yyyy";
-            this.dpOrderdate.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.dpOrderdate.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.dpOrderdate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dpOrderdate.Location = new System.Drawing.Point(524, 65);
-            this.dpOrderdate.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.dpOrderdate.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
-            this.dpOrderdate.Name = "dpOrderdate";
-            this.dpOrderdate.Size = new System.Drawing.Size(203, 37);
-            this.dpOrderdate.TabIndex = 26;
-            this.dpOrderdate.Value = new System.DateTime(2024, 10, 2, 21, 37, 54, 942);
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -524,26 +486,19 @@
             this.label6.TabIndex = 23;
             this.label6.Text = "Total Price";
             // 
-            // txtTotalPrice
+            // dpOrderdate
             // 
-            this.txtTotalPrice.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtTotalPrice.DefaultText = "";
-            this.txtTotalPrice.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtTotalPrice.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtTotalPrice.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtTotalPrice.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtTotalPrice.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtTotalPrice.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotalPrice.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtTotalPrice.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtTotalPrice.Location = new System.Drawing.Point(915, 177);
-            this.txtTotalPrice.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtTotalPrice.Name = "txtTotalPrice";
-            this.txtTotalPrice.PasswordChar = '\0';
-            this.txtTotalPrice.PlaceholderText = "";
-            this.txtTotalPrice.SelectedText = "";
-            this.txtTotalPrice.Size = new System.Drawing.Size(234, 40);
-            this.txtTotalPrice.TabIndex = 22;
+            this.dpOrderdate.CalendarFont = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dpOrderdate.CustomFormat = "dd/MM/yyyy";
+            this.dpOrderdate.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right;
+            this.dpOrderdate.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dpOrderdate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dpOrderdate.Location = new System.Drawing.Point(525, 59);
+            this.dpOrderdate.Margin = new System.Windows.Forms.Padding(4);
+            this.dpOrderdate.Name = "dpOrderdate";
+            this.dpOrderdate.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.dpOrderdate.Size = new System.Drawing.Size(162, 42);
+            this.dpOrderdate.TabIndex = 40;
             // 
             // ManageOrders
             // 
@@ -566,28 +521,31 @@
         }
 
         #endregion
-        private Guna.UI2.WinForms.Guna2Button btnCancel;
-        private Guna.UI2.WinForms.Guna2Button btnSave1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private Guna.UI2.WinForms.Guna2TextBox txtOrderID;
-        private Guna.UI2.WinForms.Guna2Button btnClear;
-        private Guna.UI2.WinForms.Guna2Button btnDelete;
-        private Guna.UI2.WinForms.Guna2TextBox txtSearch;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label placeholderLabel;
-        private Guna.UI2.WinForms.Guna2Button btnSearch;
         private System.Windows.Forms.Label label8;
-        private Guna.UI2.WinForms.Guna2DataGridView grd_Order;
-        private Guna.UI2.WinForms.Guna2Button btnUpdate;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private Guna.UI2.WinForms.Guna2TextBox txtTotalPrice;
-        private Guna.UI2.WinForms.Guna2DateTimePicker dpOrderdate;
+        private System.Windows.Forms.ComboBox cbEmployeeName;
+        private System.Windows.Forms.ComboBox cbEmployeeID;
+        private System.Windows.Forms.DataGridView grd_Order;
+        private System.Windows.Forms.TextBox txtOrderID;
+        private System.Windows.Forms.ComboBox cbClientName;
+        private System.Windows.Forms.ComboBox cbClientID;
+        private System.Windows.Forms.TextBox txtTotalPrice;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.Label placeholderLabel;
+        private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.DataGridViewTextBoxColumn order_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn client_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn client_name;
@@ -595,9 +553,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn employee_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn orderdate;
         private System.Windows.Forms.DataGridViewTextBoxColumn total_price;
-        private System.Windows.Forms.ComboBox cbClientID;
-        private System.Windows.Forms.ComboBox cbEmployeeName;
-        private System.Windows.Forms.ComboBox cbEmployeeID;
-        private System.Windows.Forms.ComboBox cbClientName;
+        private System.Windows.Forms.DateTimePicker dpOrderdate;
     }
 }

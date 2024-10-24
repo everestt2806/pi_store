@@ -19,8 +19,7 @@ namespace pi_store.Views.ChildForm.PlaceOrder
         private ProductController productController;
         private EmployeeController employeeController;
         private ClientController clientController;
-        private OrderController orderController;
-        private string option = "";
+        private OrderController orderController; 
         private bool isLoadingData = false;
 
         public PlaceOrder()
@@ -40,9 +39,9 @@ namespace pi_store.Views.ChildForm.PlaceOrder
         private void FormLoad()
         {
             grd_Cart.ClearSelection();
-            btnAddCart.Enabled = false;
-            btnSubmit.Enabled = false;
-            btnDelete.Enabled = false;
+            EnableButtonCustom(btnAddCart, false);
+            EnableButtonCustom(btnSubmit, false);
+            EnableButtonCustom(btnDelete, false);
             LoadComboboxData();
             txtTotalPrice.Text = "0 VND";
 
@@ -85,29 +84,55 @@ namespace pi_store.Views.ChildForm.PlaceOrder
             isLoadingData = false;
         }
 
+        private void EnableButtonCustom(Button btn, bool opt)
+        {
+            if (!opt)
+            {
+                btn.BackColor = Color.FromArgb(169, 169, 169);
+                btn.Enabled = false;
+
+            }
+            else
+            {
+                btn.Enabled = true;
+
+                if (btn.Name.Equals("btnSave"))
+                {
+                    btn.BackColor = Color.ForestGreen;
+                }
+                else if (btn.Name.Equals("btnCancel"))
+                {
+                    btn.BackColor = Color.DarkRed;
+                }
+                else
+                {
+                    btn.BackColor = Color.FromArgb(94, 148, 255);
+                }
+            }
+        }
+
         private void cbProductName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!isLoadingData && cbProductName.SelectedIndex > 0) 
+            if (!isLoadingData && cbProductName.SelectedIndex > 0)
             {
                 Product selectedProduct = (Product)cbProductName.SelectedItem;
-                txtProductID.Text = selectedProduct.ID.ToString(); 
-                txtQuantity.Text = "1"; 
-                btnAddCart.Enabled = true;
+                txtProductID.Text = selectedProduct.ID.ToString();
+                EnableButtonCustom(btnAddCart, true);
             }
             else
             {
                 txtProductID.Clear();
-                txtQuantity.Clear();
-                btnAddCart.Enabled = false;
+                txtProductID.Clear();
+                EnableButtonCustom(btnAddCart, false);
             }
             UpdateSubmitButtonState();
         }
         private void cbClientName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!isLoadingData && cbClientName.SelectedIndex > 0) 
+            if (!isLoadingData && cbClientName.SelectedIndex > 0)
             {
                 Client selectedClient = (Client)cbClientName.SelectedItem;
-                txtClientID.Text = selectedClient.ID.ToString(); 
+                txtClientID.Text = selectedClient.ID.ToString();
                 txtEmail.Text = selectedClient.Email.ToString();
                 txtPhone.Text = selectedClient.Phone.ToString();
                 txtAddress.Text = selectedClient.Address.ToString();
@@ -123,7 +148,7 @@ namespace pi_store.Views.ChildForm.PlaceOrder
         }
         private void cbEmployeeName_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!isLoadingData && cbEmployeeName.SelectedIndex > 0)  // Kiểm tra cbEmployeeName
+            if (!isLoadingData && cbEmployeeName.SelectedIndex > 0) 
             {
                 Employee selectedEmployee = (Employee)cbEmployeeName.SelectedItem;
                 txtEmployeeID.Text = selectedEmployee.ID.ToString();
@@ -133,7 +158,7 @@ namespace pi_store.Views.ChildForm.PlaceOrder
                 txtEmployeeID.Clear();
             }
 
-            UpdateSubmitButtonState(); // Gọi sau khi xử lý
+            UpdateSubmitButtonState(); 
         }
 
 
@@ -161,7 +186,7 @@ namespace pi_store.Views.ChildForm.PlaceOrder
                 }
 
                 ClearProductSelection();
-                UpdateTotalPrice(); // Gọi hàm cập nhật tổng giá
+                UpdateTotalPrice(); 
             }
         }
         private void UpdateTotalPrice()
@@ -172,11 +197,11 @@ namespace pi_store.Views.ChildForm.PlaceOrder
             {
                 if (row.Cells["price"].Value != null && row.Cells["quantity"].Value != null)
                 {
-                    // Chuyển đổi giá trị ô giá thành chuỗi và loại bỏ " VND" và dấu phẩy
+                  
                     string priceString = row.Cells["price"].Value.ToString().Trim().Replace(" VND", "").Replace(".", "").Replace(",", "");
                     string quantityString = row.Cells["quantity"].Value.ToString().Trim();
 
-                    // Kiểm tra và chuyển đổi giá trị
+                    
                     if (int.TryParse(priceString, out int price) && int.TryParse(quantityString, out int quantity))
                     {
                         totalPrice += price * quantity;
@@ -189,7 +214,7 @@ namespace pi_store.Views.ChildForm.PlaceOrder
                 }
             }
 
-            // Hiển thị tổng giá trị với định dạng tiền tệ
+            
             txtTotalPrice.Text = totalPrice.ToString("N0") + " VND";
         }
 
@@ -199,21 +224,22 @@ namespace pi_store.Views.ChildForm.PlaceOrder
             cbProductName.SelectedIndex = -1;
             txtProductID.Clear();
             txtQuantity.Clear();
-            btnAddCart.Enabled = false;
+            EnableButtonCustom(btnAddCart, false);
         }
 
         private void UpdateSubmitButtonState()
         {
-            bool isReady = grd_Cart.RowCount > 0 &&  
-                           cbEmployeeName.SelectedIndex > 0 &&  
-                           cbClientName.SelectedIndex > 0;    
+            bool isReady = grd_Cart.RowCount > 0 &&
+                           cbEmployeeName.SelectedIndex > 0 &&
+                           cbClientName.SelectedIndex > 0;
 
-            btnSubmit.Enabled = isReady;
+            EnableButtonCustom(btnSubmit, isReady);
         }
 
 
 
-        private void Clear() {
+        private void Clear()
+        {
             txtClientID.Clear();
             txtEmployeeID.Clear();
             txtPhone.Clear();
@@ -234,7 +260,7 @@ namespace pi_store.Views.ChildForm.PlaceOrder
 
         private void grd_Cart_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            btnDelete.Enabled = true;
+            EnableButtonCustom(btnDelete, true);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -247,7 +273,7 @@ namespace pi_store.Views.ChildForm.PlaceOrder
 
                 if (grd_Cart.Rows.Count == 0 || (grd_Cart.Rows.Count == 1 && grd_Cart.AllowUserToAddRows))
                 {
-                    btnDelete.Enabled = false; 
+                    EnableButtonCustom(btnDelete, false);
                 }
             }
             else
@@ -260,63 +286,78 @@ namespace pi_store.Views.ChildForm.PlaceOrder
         {
             try
             {
-                // Lấy dữ liệu từ các TextBox và ComboBox
-                string orderID = orderController.GenerateNewOrderID(); // Hàm tự động sinh mã OrderID (như đã tạo trước đó)
-                string clientID = txtClientID.Text;
-                string employeeID = txtEmployeeID.Text;
-                DateTime orderDate = DateTime.Now; // Ngày hiện tại
-                string price = txtTotalPrice.Text.ToString().Replace(" VND", "").Replace(".", "");
-                int totalPrice = Convert.ToInt32(price.Trim());
+                // Validate input
+                if (string.IsNullOrEmpty(txtClientID.Text) || string.IsNullOrEmpty(txtEmployeeID.Text))
+                {
+                    MessageBox.Show("Please enter all required fields.", "Validation Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-                // Tạo đối tượng Order mới
+                // Parse total price
+                string price = txtTotalPrice.Text.ToString().Replace(" VND", "").Replace(".", "");
+                if (!int.TryParse(price.Trim(), out int totalPrice))
+                {
+                    MessageBox.Show("Invalid price format.", "Validation Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Create new order
                 Order newOrder = new Order
                 {
-                    ID = orderID,
-                    ClientID = clientID,
-                    EmployeeID = employeeID,
-                    OrderDate = orderDate,
+                    ClientID = txtClientID.Text.Trim(),
+                    EmployeeID = txtEmployeeID.Text.Trim(),
+                    OrderDate = DateTime.Now,
                     TotalPrice = totalPrice
                 };
 
-                // Thêm order vào cơ sở dữ liệu
-                orderController.AddOrder(newOrder);
+                // Add order and get new order ID
+                string orderID = orderController.AddOrder(newOrder);
+                if (string.IsNullOrEmpty(orderID))
+                {
+                    throw new Exception("Failed to create new order.");
+                }
 
-                // Thêm các sản phẩm trong giỏ hàng (grd_Cart) vào bảng OrderItem
+                // Process order items
                 foreach (DataGridViewRow row in grd_Cart.Rows)
                 {
                     if (row.IsNewRow) continue;
 
-                    string productName = row.Cells["productname"].Value.ToString();
-                    Product product = productController.GetProductByName(productName); // Giả sử bạn có hàm này
+                    string productName = row.Cells["productname"].Value?.ToString();
+                    if (string.IsNullOrEmpty(productName)) continue;
 
-                    int quantity = int.Parse(row.Cells["quantity"].Value.ToString());
+                    Product product = productController.GetProductByName(productName);
+                    if (product == null) continue;
 
-                    // Tạo đối tượng OrderItem mới
+                    if (!int.TryParse(row.Cells["quantity"].Value?.ToString(), out int quantity))
+                        continue;
+
                     OrderItem newOrderItem = new OrderItem
                     {
-                        ID = orderController.GenerateNewOrderItemID(), // Hàm sinh mã OrderItem
                         OrderID = orderID,
                         ProductID = product.ID,
                         Quantity = quantity
                     };
 
-                    // Thêm order item vào cơ sở dữ liệu
-                    orderController.AddOrderItem(newOrderItem);
+                    string orderItemID = orderController.AddOrderItem(newOrderItem);
+                    if (string.IsNullOrEmpty(orderItemID))
+                    {
+                        throw new Exception($"Failed to add order item for product {productName}");
+                    }
                 }
 
-                // Hiển thị thông báo thành công
-                MessageBox.Show("Order has been submitted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Order {orderID} has been submitted successfully.", "Success",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // Reset lại form sau khi submit
                 Clear();
                 grd_Cart.Rows.Clear();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error while submitting the order: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error while submitting the order: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-
     }
 }

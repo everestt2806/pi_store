@@ -9,7 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media;
-using TheArtOfDevHtmlRenderer.Adapters.Entities;
 using Color = System.Drawing.Color;
 using pi_store.Views.ChildForm.ManageClients;
 using pi_store.Views.ChildForm.ManageEmployees;
@@ -69,7 +68,7 @@ namespace pi_store.Views
                 currentBtn.ForeColor = color;
                 currentBtn.TextAlign = ContentAlignment.MiddleCenter;
                 currentBtn.IconColor = color;
-                currentBtn.TextImageRelation = TextImageRelation.TextBeforeImage;
+                currentBtn.TextImageRelation = TextImageRelation.ImageBeforeText;
                 currentBtn.ImageAlign = ContentAlignment.MiddleRight;
                 leftBorderBtn.Height = currentBtn.Height;
                 leftBorderBtn.BackColor = color;
@@ -83,7 +82,7 @@ namespace pi_store.Views
 
             }
         }
-
+ 
         private void disableBtn() {
             if (currentBtn != null) {
                 currentBtn.BackColor = System.Drawing.Color.FromArgb(154, 178, 242);

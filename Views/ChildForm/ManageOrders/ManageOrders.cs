@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Drawing;
 using System.Net.NetworkInformation;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using Guna.UI2.WinForms;
 using pi_store.Controllers;
 using pi_store.Models;
 
@@ -37,17 +37,17 @@ namespace pi_store.Views.ChildForm.ManageOrders
             ClearText();
             LoadComboboxData();
             LoadOrder();
-            btnSave1.Enabled = false;
-            btnCancel.Enabled = false;
-            btnUpdate.Enabled = false;
-            btnDelete.Enabled = false;
+            EnableButtonCustom(btnSave, false);
+            EnableButtonCustom(btnCancel, false);
+            EnableButtonCustom(btnUpdate, false);
+            EnableButtonCustom(btnDelete, false);
 
-            DisableTextBox(txtOrderID, true);
+            txtOrderID.Enabled = false;
             cbClientID.Enabled = false;
             cbClientName.Enabled = false;
             cbEmployeeID.Enabled = false;
             cbEmployeeName.Enabled = false;
-            DisableTextBox(txtTotalPrice, true);
+            txtTotalPrice.Enabled = false;
             dpOrderdate.Enabled = false;
         }
 
@@ -71,12 +71,6 @@ namespace pi_store.Views.ChildForm.ManageOrders
             }
         }
 
-        private void DisableTextBox(Guna2TextBox textBox, bool isDisabled)
-        {
-            textBox.ReadOnly = isDisabled;
-            textBox.FillColor = isDisabled ? Color.FromArgb(226, 226, 226) : Color.White;
-            textBox.HoverState.BorderColor = isDisabled ? Color.FromArgb(226, 226, 226) : Color.FromArgb(94, 148, 255);
-        }
 
         private void ClearText()
         {
@@ -87,6 +81,33 @@ namespace pi_store.Views.ChildForm.ManageOrders
             cbEmployeeName.SelectedIndex = -1;
             txtTotalPrice.Clear();
             dpOrderdate.Value = new DateTime(DateTime.Now.Year, 1, 1);
+        }
+
+        private void EnableButtonCustom(Button btn, bool opt)
+        {
+            if (!opt)
+            {
+                btn.BackColor = Color.FromArgb(169, 169, 169);
+                btn.Enabled = false;
+
+            }
+            else
+            {
+                btn.Enabled = true;
+
+                if (btn.Name.Equals("btnSave"))
+                {
+                    btn.BackColor = Color.ForestGreen;
+                }
+                else if (btn.Name.Equals("btnCancel"))
+                {
+                    btn.BackColor = Color.DarkRed;
+                }
+                else
+                {
+                    btn.BackColor = Color.FromArgb(94, 148, 255);
+                }
+            }
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -124,33 +145,53 @@ namespace pi_store.Views.ChildForm.ManageOrders
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             option = "update";
-            btnUpdate.Enabled = false;
-            btnDelete.Enabled = false;
-            btnSave1.Enabled = true;
-            btnCancel.Enabled = true;
+            grd_Order.Enabled = false;
+            EnableButtonCustom(btnUpdate, false);
+            EnableButtonCustom(btnDelete, false);
+            EnableButtonCustom(btnSave, true);
+            EnableButtonCustom(btnCancel, true);
 
-            DisableTextBox(txtOrderID, true);
+            txtOrderID.Enabled = false;
             cbClientID.Enabled = true;
             cbClientName.Enabled = true;
             cbEmployeeID.Enabled = true;
             cbEmployeeName.Enabled = true;
             dpOrderdate.Enabled = true;
-            DisableTextBox(txtTotalPrice, false);
+            txtTotalPrice.Enabled = true;
            
         }
 
         private void grd_Order_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            btnUpdate.Enabled = true;
-            btnDelete.Enabled = true;
-            txtOrderID.Text = grd_Order.CurrentRow.Cells[0].Value.ToString().Trim();
-            cbClientID.Text = grd_Order.CurrentRow.Cells[1].Value.ToString().Trim();
-            cbClientName.Text = grd_Order.CurrentRow.Cells[2].Value.ToString().Trim();
-            cbEmployeeID.Text = grd_Order.CurrentRow.Cells[3].Value.ToString().Trim();
-            cbEmployeeName.Text = grd_Order.CurrentRow.Cells[4].Value.ToString().Trim();
-            dpOrderdate.Text = grd_Order.CurrentRow.Cells[5].Value.ToString().Trim();
-            string total = grd_Order.CurrentRow.Cells[6].Value.ToString().Replace(" VND", "").Replace(".", "");
-            txtTotalPrice.Text = total.Trim();
+           
+            if (e.RowIndex < 0 || grd_Order.Rows.Count == 0) return;
+
+           
+            if (grd_Order.CurrentRow == null) return;
+
+            try
+            {
+                EnableButtonCustom(btnUpdate, true);
+                EnableButtonCustom(btnDelete, true);
+
+                
+                txtOrderID.Text = grd_Order.CurrentRow.Cells[0].Value?.ToString().Trim() ?? "";
+                cbClientID.Text = grd_Order.CurrentRow.Cells[1].Value?.ToString().Trim() ?? "";
+                cbClientName.Text = grd_Order.CurrentRow.Cells[2].Value?.ToString().Trim() ?? "";
+                cbEmployeeID.Text = grd_Order.CurrentRow.Cells[3].Value?.ToString().Trim() ?? "";
+                cbEmployeeName.Text = grd_Order.CurrentRow.Cells[4].Value?.ToString().Trim() ?? "";
+                dpOrderdate.Text = grd_Order.CurrentRow.Cells[5].Value?.ToString().Trim() ?? "";
+                txtTotalPrice.Text = grd_Order.CurrentRow.Cells[6].Value?.ToString()
+                      .Replace(" VND", "")
+                      .Replace(".", "")
+                      .Trim() ?? "0";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                
+
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -205,6 +246,26 @@ namespace pi_store.Views.ChildForm.ManageOrders
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             placeholderLabel.Visible = string.IsNullOrEmpty(txtSearch.Text);
+
+            if (string.IsNullOrEmpty(txtSearch.Text))
+            {
+
+                List<Order> orders = orderController.GetAllOrders();
+                grd_Order.Rows.Clear();
+
+                foreach (var order in orders)
+                {
+                    int rowIndex = grd_Order.Rows.Add();
+                    DataGridViewRow row = grd_Order.Rows[rowIndex];
+                    row.Cells["order_id"].Value = order.ID;
+                    row.Cells["client_id"].Value = order.ClientID;
+                    row.Cells["client_name"].Value = order.ClientName;
+                    row.Cells["employee_id"].Value = order.EmployeeID;
+                    row.Cells["employee_name"].Value = order.EmployeeName;
+                    row.Cells["orderdate"].Value = order.OrderDate;
+                    row.Cells["total_price"].Value = order.TotalPrice.ToString("N0") + " VND";
+                }
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
