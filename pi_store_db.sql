@@ -56,6 +56,11 @@ CREATE TABLE [dbo].[OrderItem](
     FOREIGN KEY (ProductID) REFERENCES [dbo].[Product](ID)
 );
 GO
+
+CREATE TABLE [dbo].[UserInfo](
+	[Username] VARCHAR(20),
+	[Password] VARCHAR(20)
+)
 -- Thêm dữ liệu mẫu vào bảng Employee
 INSERT INTO Employee (ID, Name, Email, Phone, Address, Salary, HireDate)
 VALUES 
@@ -113,6 +118,11 @@ VALUES
 ('OI1009', 'OD1005', 'PD1004', 2),
 ('OI1010', 'OD1005', 'PD1005', 1);
 
+
+insert into UserInfo(Username, Password)
+VALUES 
+('user1', '123456'),
+('user2', '123456');
 
 -- Create Stored Procedure
 

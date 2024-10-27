@@ -46,5 +46,10 @@ namespace pi_store.Controllers
         {
             return clientDAO.SearchClients(searchString);
         }
+
+        public List<CustomerInfo> GetTopCustomers()
+        {
+            return clientDAO.GetTopCustomers();
+        }
     }
 }

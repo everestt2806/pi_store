@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using pi_store.DataAccess;
+using System.Windows.Forms;
 
 namespace pi_store.Controllers
 {
@@ -28,7 +29,7 @@ namespace pi_store.Controllers
             return productDAO.GetProductById(id);
         }
 
-        public Product GetProductByName(string name) { 
+        public Product GetProductByName(string name) {
             return productDAO.GetProductByName(name);
         }
 
@@ -50,6 +51,14 @@ namespace pi_store.Controllers
         public List<Product> SearchProducts(string searchString)
         {
             return productDAO.SearchProducts(searchString);
+        }
+
+        public List<Product> LoadProductsByOrderID(string orderID) {
+            return productDAO.LoadProductsByOrderID(orderID);
+        }
+
+        public bool UpdateProductQuantityInDb(string productId, int newQuantity) {
+            return productDAO.UpdateProductQuantityInDb(productId, newQuantity);
         }
     }
 }

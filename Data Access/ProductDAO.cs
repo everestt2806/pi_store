@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using pi_store.Services;
 using pi_store.Models;
+using System.Data;
+using System.Windows.Forms;
 
 namespace pi_store.DataAccess
 {
@@ -64,6 +66,64 @@ namespace pi_store.DataAccess
                 }
                 reader.Close();
                 return null;
+            }
+        }
+
+        public List<Product> LoadProductsByOrderID(string orderID)
+        {
+            List<Product> products = new List<Product>();
+
+            string query = @"
+        SELECT p.ID, p.Name, p.Price, oi.Quantity
+        FROM OrderItem oi
+        JOIN Product p ON oi.ProductID = p.ID
+        WHERE oi.OrderID = @OrderID";
+
+            using (SqlCommand command = new SqlCommand(query, conn.GetConnection()))
+            {
+                command.Parameters.AddWithValue("@OrderID", orderID);
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Product product = new Product
+                        {
+                            ID = reader["ID"].ToString(),
+                            Name = reader["Name"].ToString(),
+                            Price = Convert.ToInt32(reader["Price"]),
+                            Quantity = Convert.ToInt32(reader["Quantity"])
+                        };
+                        products.Add(product);
+                    }
+                }
+            }
+
+            return products;
+        }
+
+        public bool UpdateProductQuantityInDb(string productId, int newQuantity)
+        {
+            try
+            {
+                string query = "UPDATE Product SET Quantity = @Quantity WHERE ID = @ProductId";
+                using (SqlCommand command = new SqlCommand(query, conn.GetConnection()))
+                {
+                    command.Parameters.AddWithValue("@Quantity", newQuantity);
+                    command.Parameters.AddWithValue("@ProductId", productId);
+
+                    
+                    int rowsAffected = command.ExecuteNonQuery();
+                    
+
+                    return rowsAffected > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Xử lý ngoại lệ, ghi log nếu cần
+                Console.WriteLine($"Error updating product quantity: {ex.Message}");
+                return false;
             }
         }
 

@@ -211,6 +211,7 @@
             this.menu_dashboard.Text = "Dashboard";
             this.menu_dashboard.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.menu_dashboard.UseVisualStyleBackColor = false;
+            this.menu_dashboard.Click += new System.EventHandler(this.menu_dashboard_Click);
             // 
             // panel1
             // 

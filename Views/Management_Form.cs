@@ -15,6 +15,8 @@ using pi_store.Views.ChildForm.ManageEmployees;
 using pi_store.Views.ChildForm.ManageProducts;
 using pi_store.Views.ChildForm.ManageOrders;
 using pi_store.Views.ChildForm.PlaceOrder;
+using pi_store.Views.ChildForm.GenerateBill;
+using pi_store.Views.ChildForm.Dashboard;
 
 
 namespace pi_store.Views
@@ -40,6 +42,7 @@ namespace pi_store.Views
             leftBorderBtn.Size = new Size(7, 60);
             menu.Controls.Add(leftBorderBtn);
             activateBtn(menu_dashboard, leftBorderColor);
+            openChildForm(new Dashboard());
         }
 
         private void openChildForm(Form childForm)
@@ -124,7 +127,7 @@ namespace pi_store.Views
         private void bill_generate_Click_1(object sender, EventArgs e)
         {
             activateBtn(sender, leftBorderColor);
-            //openChildForm(new GenerateBill());
+            openChildForm(new BillGenerator());
 
         }
 
@@ -133,6 +136,11 @@ namespace pi_store.Views
             activateBtn(sender, leftBorderColor);
             openChildForm(new PlaceOrder());
         }
-        
+
+        private void menu_dashboard_Click(object sender, EventArgs e)
+        {
+            activateBtn(sender, leftBorderColor);
+            openChildForm(new Dashboard());
+        }
     }
 }

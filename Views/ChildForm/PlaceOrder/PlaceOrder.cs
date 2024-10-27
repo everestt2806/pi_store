@@ -100,7 +100,7 @@ namespace pi_store.Views.ChildForm.PlaceOrder
                 {
                     btn.BackColor = Color.ForestGreen;
                 }
-                else if (btn.Name.Equals("btnCancel"))
+                else if (btn.Name.Equals("btnDelete") || btn.Name.Equals("btnReset"))
                 {
                     btn.BackColor = Color.DarkRed;
                 }
@@ -168,12 +168,30 @@ namespace pi_store.Views.ChildForm.PlaceOrder
             {
                 Product selectedProduct = (Product)cbProductName.SelectedItem;
 
+             
+                if (quantity > selectedProduct.Quantity)
+                {
+                    MessageBox.Show("Số lượng yêu cầu vượt quá số lượng hàng trong kho.", "Cảnh báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 bool productExists = false;
                 foreach (DataGridViewRow row in grd_Cart.Rows)
                 {
                     if (row.Cells["productname"].Value.ToString() == selectedProduct.Name)
                     {
-                        row.Cells["quantity"].Value = (int)row.Cells["quantity"].Value + quantity;
+                        int currentQuantity = (int)row.Cells["quantity"].Value;
+
+                        
+                        if (currentQuantity + quantity > selectedProduct.Quantity)
+                        {
+                            MessageBox.Show("Số lượng yêu cầu vượt quá số lượng hàng trong kho.", "Cảnh báo",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
+                        row.Cells["quantity"].Value = currentQuantity + quantity;
                         productExists = true;
                         break;
                     }
@@ -186,9 +204,10 @@ namespace pi_store.Views.ChildForm.PlaceOrder
                 }
 
                 ClearProductSelection();
-                UpdateTotalPrice(); 
+                UpdateTotalPrice();
             }
         }
+
         private void UpdateTotalPrice()
         {
             int totalPrice = 0;
@@ -225,6 +244,7 @@ namespace pi_store.Views.ChildForm.PlaceOrder
             txtProductID.Clear();
             txtQuantity.Clear();
             EnableButtonCustom(btnAddCart, false);
+            grd_Cart.ClearSelection();
         }
 
         private void UpdateSubmitButtonState()
@@ -274,6 +294,7 @@ namespace pi_store.Views.ChildForm.PlaceOrder
                 if (grd_Cart.Rows.Count == 0 || (grd_Cart.Rows.Count == 1 && grd_Cart.AllowUserToAddRows))
                 {
                     EnableButtonCustom(btnDelete, false);
+                    UpdateSubmitButtonState();
                 }
             }
             else
@@ -333,6 +354,7 @@ namespace pi_store.Views.ChildForm.PlaceOrder
                     if (!int.TryParse(row.Cells["quantity"].Value?.ToString(), out int quantity))
                         continue;
 
+                    // Create new OrderItem
                     OrderItem newOrderItem = new OrderItem
                     {
                         OrderID = orderID,
@@ -345,6 +367,10 @@ namespace pi_store.Views.ChildForm.PlaceOrder
                     {
                         throw new Exception($"Failed to add order item for product {productName}");
                     }
+
+                    // Update product quantity in stock
+                    int newQuantityInStock = product.Quantity - quantity;
+                    productController.UpdateProductQuantityInDb(product.ID, newQuantityInStock);
                 }
 
                 MessageBox.Show($"Order {orderID} has been submitted successfully.", "Success",
@@ -359,5 +385,6 @@ namespace pi_store.Views.ChildForm.PlaceOrder
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
     }
 }

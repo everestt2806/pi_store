@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using pi_store.Services;
 using pi_store.Models;
+using pi_store.Services;
 
 namespace pi_store.DataAccess
 {
@@ -31,7 +31,7 @@ namespace pi_store.DataAccess
                         Name = reader["Name"].ToString(),
                         Email = reader["Email"].ToString(),
                         Phone = reader["Phone"].ToString(),
-                        Address = reader["Address"].ToString()
+                        Address = reader["Address"].ToString(),
                     };
                     clients.Add(client);
                 }
@@ -66,28 +66,77 @@ namespace pi_store.DataAccess
                 return null;
             }
         }
+
+        public string getClientNamebyID(string clientID)
+        {
+            string clientName = string.Empty;
+            string query = "SELECT Name FROM Client WHERE ID = @ClientID";
+
+            using (SqlCommand command = new SqlCommand(query, conn.GetConnection()))
+            {
+                command.Parameters.AddWithValue("@ClientID", clientID);
+                object result = command.ExecuteScalar();
+                if (result != null)
+                {
+                    clientName = result.ToString();
+                }
+            }
+            return clientName;
+        }
+
+        public List<CustomerInfo> GetTopCustomers()
+        {
+            List<CustomerInfo> topCustomers = new List<CustomerInfo>();
+            string query =
+                @"
+SELECT TOP 3 Client.Name, Client.Phone, SUM(TotalPrice) AS TotalSpent
+FROM [Order]
+JOIN Client ON [Order].ClientID = Client.ID
+GROUP BY Client.Name, Client.Phone
+ORDER BY TotalSpent DESC";
+
+            using (SqlCommand command = new SqlCommand(query, conn.GetConnection()))
+            {
+                using (var result = command.ExecuteReader())
+                {
+                    while (result.Read())
+                    {
+                        topCustomers.Add(
+                            new CustomerInfo
+                            {
+                                Name = result["Name"].ToString(),
+                                Phone = result["Phone"].ToString(),
+                                TotalSpent =
+                                    result["TotalSpent"] != DBNull.Value
+                                        ? Convert.ToInt64(result["TotalSpent"])
+                                        : 0,
+                            }
+                        );
+                    }
+                }
+            }
+            return topCustomers;
+        }
+
         public void AddClient(Client client)
         {
             using (SqlCommand command = new SqlCommand("sp_AddClient", conn.GetConnection()))
             {
-             
                 command.CommandType = System.Data.CommandType.StoredProcedure;
 
-               
                 command.Parameters.AddWithValue("@Name", client.Name);
                 command.Parameters.AddWithValue("@Email", client.Email);
                 command.Parameters.AddWithValue("@Phone", client.Phone);
                 command.Parameters.AddWithValue("@Address", client.Address);
 
-               
                 command.ExecuteNonQuery();
             }
         }
 
-
         public void UpdateClient(Client client)
         {
-            string query = @"UPDATE Client 
+            string query =
+                @"UPDATE Client 
                              SET Name = @Name, Email = @Email, Phone = @Phone, Address = @Address 
                              WHERE ID = @ID";
 
@@ -117,7 +166,8 @@ namespace pi_store.DataAccess
         public List<Client> SearchClients(string searchTerm)
         {
             List<Client> clients = new List<Client>();
-            string query = "SELECT * FROM Client WHERE Name LIKE @SearchTerm OR ID LIKE @SearchTerm";
+            string query =
+                "SELECT * FROM Client WHERE Name LIKE @SearchTerm OR ID LIKE @SearchTerm";
 
             using (SqlCommand command = new SqlCommand(query, conn.GetConnection()))
             {
@@ -132,7 +182,7 @@ namespace pi_store.DataAccess
                         Name = reader["Name"].ToString(),
                         Email = reader["Email"].ToString(),
                         Phone = reader["Phone"].ToString(),
-                        Address = reader["Address"].ToString()
+                        Address = reader["Address"].ToString(),
                     };
                     clients.Add(client);
                 }

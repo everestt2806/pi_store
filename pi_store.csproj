@@ -33,8 +33,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
+      <HintPath>packages\BouncyCastle.Cryptography.2.4.0\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.Charts.WinForms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=e8e24ccd28363fe9, processorArchitecture=MSIL">
+      <HintPath>packages\Bunifu.Charts.WinForms.2.0.0\lib\net40\Bunifu.Charts.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.Licensing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f89b4760ba7dcb6b, processorArchitecture=MSIL">
+      <HintPath>packages\Bunifu.Licensing.6.0.4\lib\net472\Bunifu.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.UI.WinForms, Version=0.0.0.0, Culture=neutral, PublicKeyToken=e8e24ccd28363fe9, processorArchitecture=MSIL">
+      <HintPath>packages\Bunifu.UI.WinForms.7.2.0\lib\net472\Bunifu.UI.WinForms.dll</HintPath>
+    </Reference>
     <Reference Include="FontAwesome.Sharp, Version=6.6.0.0, Culture=neutral, PublicKeyToken=d16d1e4e568ec10f, processorArchitecture=MSIL">
       <HintPath>packages\FontAwesome.Sharp.6.6.0\lib\net472\FontAwesome.Sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.4, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>packages\iTextSharp.5.5.13.4\lib\net461\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -83,6 +98,7 @@
       <HintPath>packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -106,11 +122,24 @@
     <Compile Include="Data Access\ClientDAO.cs" />
     <Compile Include="Data Access\EmployeeDAO.cs" />
     <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\CustomerInfo.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderItem.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Services\DBConnection.cs" />
+    <Compile Include="Views\ChildForm\Dashboard\Dashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ChildForm\Dashboard\Dashboard.Designer.cs">
+      <DependentUpon>Dashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChildForm\GenerateBill\BillGenerator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ChildForm\GenerateBill\BillGenerator.Designer.cs">
+      <DependentUpon>BillGenerator.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\ChildForm\ManageEmployees\ManageEmployees.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -141,12 +170,6 @@
     <Compile Include="Views\ChildForm\PlaceOrder\PlaceOrder.Designer.cs">
       <DependentUpon>PlaceOrder.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\ChildForm\GenerateBill\GenerateBill.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\ChildForm\GenerateBill\GenerateBill.Designer.cs">
-      <DependentUpon>GenerateBill.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\ChildForm\TestForm\Custom.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -167,6 +190,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Views\ChildForm\Dashboard\Dashboard.resx">
+      <DependentUpon>Dashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ChildForm\GenerateBill\BillGenerator.resx">
+      <DependentUpon>BillGenerator.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\ChildForm\ManageEmployees\ManageEmployees.resx">
       <DependentUpon>ManageEmployees.cs</DependentUpon>
     </EmbeddedResource>
@@ -181,9 +210,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ChildForm\PlaceOrder\PlaceOrder.resx">
       <DependentUpon>PlaceOrder.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\ChildForm\GenerateBill\GenerateBill.resx">
-      <DependentUpon>GenerateBill.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ChildForm\TestForm\Custom.resx">
       <DependentUpon>Custom.cs</DependentUpon>
