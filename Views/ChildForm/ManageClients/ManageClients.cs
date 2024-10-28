@@ -85,6 +85,7 @@ namespace pi_store.Views.ChildForm.ManageClients
                 row.Cells["Phone"].Value = client.Phone;
                 row.Cells["Address"].Value = client.Address;
             }
+            grd_Client.ClearSelection();
         }
 
         private void ClearText()

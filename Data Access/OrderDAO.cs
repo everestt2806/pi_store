@@ -319,6 +319,57 @@ namespace pi_store.DataAccess
             return totalRevenue;
         }
 
+        public ChartData GetDashboardChartData()
+        {
+            var dashboardData = new ChartData
+            {
+                RevenueData = new List<(DateTime, decimal)>(), 
+                TopSellingProducts = new Dictionary<string, int>()
+            };
+
+            string revenueQuery = @"
+        SELECT CAST(OrderDate AS DATE) AS OrderDate, SUM(TotalPrice) AS TotalRevenue
+        FROM [Order]
+        GROUP BY CAST(OrderDate AS DATE)
+        ORDER BY OrderDate ASC";
+
+            string topProductsQuery = @"
+        SELECT Product.Name, SUM(OrderItem.Quantity) AS QuantitySold
+        FROM [Order]
+        JOIN OrderItem ON [Order].ID = OrderItem.OrderID
+        JOIN Product ON OrderItem.ProductID = Product.ID
+        GROUP BY Product.Name
+        ORDER BY QuantitySold DESC";
+
+            using (var connection = conn.GetConnection())
+            {
+                // Revenue query
+                using (var revenueCommand = new SqlCommand(revenueQuery, connection))
+                using (var revenueReader = revenueCommand.ExecuteReader())
+                {
+                    while (revenueReader.Read())
+                    {
+                        DateTime date = revenueReader.GetDateTime(0);
+                        decimal totalRevenue = revenueReader.GetDecimal(1); 
+                        dashboardData.RevenueData.Add((date, totalRevenue));
+                    }
+                }
+
+                // Top products query
+                using (var productCommand = new SqlCommand(topProductsQuery, connection))
+                using (var productReader = productCommand.ExecuteReader())
+                {
+                    while (productReader.Read())
+                    {
+                        string productName = productReader.GetString(0);
+                        int quantitySold = productReader.GetInt32(1);
+                        dashboardData.TopSellingProducts[productName] = quantitySold;
+                    }
+                }
+            }
+
+            return dashboardData;
+        }
 
     }
 }

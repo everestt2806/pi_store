@@ -121,6 +121,7 @@
     <Compile Include="Data Access\ProductDAO.cs" />
     <Compile Include="Data Access\ClientDAO.cs" />
     <Compile Include="Data Access\EmployeeDAO.cs" />
+    <Compile Include="Models\ChartData.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\CustomerInfo.cs" />
     <Compile Include="Models\Product.cs" />

@@ -59,6 +59,7 @@ namespace pi_store.Views.ChildForm.ManageProducts
                 row.Cells["Quantity"].Value = product.Quantity;
                 row.Cells["Description"].Value = product.Description;
             }
+            grd_Product.ClearSelection();
         }
 
 

@@ -66,5 +66,9 @@ namespace pi_store.Controllers
         {
             return orderDAO.GetTotalRevenue();
         }
+
+        public ChartData GetDashboardChartData() { 
+            return orderDAO.GetDashboardChartData();
+        }
     }
 }

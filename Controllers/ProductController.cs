@@ -60,5 +60,9 @@ namespace pi_store.Controllers
         public bool UpdateProductQuantityInDb(string productId, int newQuantity) {
             return productDAO.UpdateProductQuantityInDb(productId, newQuantity);
         }
+
+        public List<string> GetBestSellingProductNames() {
+            return productDAO.GetBestSellingProductNames();
+        }
     }
 }

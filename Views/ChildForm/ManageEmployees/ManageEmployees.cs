@@ -64,6 +64,7 @@ namespace pi_store.Views.ChildForm.ManageEmployees
                 string salary = employee.Salary.ToString("N0") + " VND";
                 row.Cells["Salary"].Value = salary;
             }
+            grd_Employee.ClearSelection();
         }
 
         private void ManageEmployees_Load(object sender, EventArgs e)

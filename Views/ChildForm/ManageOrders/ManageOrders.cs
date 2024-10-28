@@ -69,6 +69,7 @@ namespace pi_store.Views.ChildForm.ManageOrders
                 string totalPrice = order.TotalPrice.ToString("N0") + " VND";
                 row.Cells["total_price"].Value = totalPrice;
             }
+            grd_Order.ClearSelection();
         }
 
 

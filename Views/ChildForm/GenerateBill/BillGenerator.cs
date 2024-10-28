@@ -153,11 +153,11 @@ namespace pi_store.Views.ChildForm.GenerateBill
         public string ConvertNumberToWords(decimal number)
         {
             if (number == 0)
-                return "Không đồng";
+                return "Không Đồng";
 
-            string[] unitsMap = new[] { "đồng", "nghìn", "triệu", "tỷ" };
-            string[] oneMap = new[] { "không", "một", "hai", "ba", "bốn", "năm", "sáu", "bảy", "tám", "chín" };
-            string[] twoMap = new[] { "", "mười", "hai mươi", "ba mươi", "bốn mươi", "năm mươi", "sáu mươi", "bảy mươi", "tám mươi", "chín mươi" };
+            string[] unitsMap = new[] { "Đồng", "Nghìn", "Triệu", "Tỷ" };
+            string[] oneMap = new[] { "Không", "Một", "Hai", "Ba", "Bốn", "Năm", "Sáu", "Bảy", "Tám", "Chín" };
+            string[] twoMap = new[] { "", "Mười", "Hai Mươi", "Ba Mươi", "Bốn Mươi", "Năm Mươi", "Sáu Mươi", "Bảy Mươi", "Tám Mươi", "Chín Mươi" };
 
             string words = "";
             int unitIndex = 0;

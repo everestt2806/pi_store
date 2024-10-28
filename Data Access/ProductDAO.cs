@@ -235,6 +235,30 @@ namespace pi_store.DataAccess
             }
             return products;
         }
+
+        public List<string> GetBestSellingProductNames()
+        {
+            List<string> bestSellingProductNames = new List<string>();
+            string query = @"
+SELECT TOP 3 Product.Name
+FROM OrderItem
+JOIN Product ON OrderItem.ProductID = Product.ID
+GROUP BY Product.Name
+ORDER BY SUM(OrderItem.Quantity) DESC";
+
+            using (SqlCommand command = new SqlCommand(query, conn.GetConnection()))
+            {
+                using (var result = command.ExecuteReader())
+                {
+                    while (result.Read())
+                    {
+                        bestSellingProductNames.Add(result["Name"].ToString());
+                    }
+                }
+            }
+            return bestSellingProductNames;
+        }
+
     }
 }
 
