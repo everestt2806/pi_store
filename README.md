@@ -37,7 +37,7 @@ The system uses the following SQL Server database schema:
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/pi-store-management.git
+   git clone https://github.com/everestt2806/pi_store.git
    ```
 2. Open the solution file `PiStoreManagement.sln` in Visual Studio.
 3. Update the connection string in `App.config` to point to your SQL Server instance.
