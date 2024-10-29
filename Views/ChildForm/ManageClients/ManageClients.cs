@@ -2,9 +2,15 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using pi_store.Controllers;
 using pi_store.Models;
+using ClosedXML.Excel;
+using System.Xml.Linq;
+using SaveOptions = ClosedXML.Excel.SaveOptions;
+using System.Linq;
 
 namespace pi_store.Views.ChildForm.ManageClients
 {
@@ -49,7 +55,6 @@ namespace pi_store.Views.ChildForm.ManageClients
             {
                 btn.BackColor = Color.FromArgb(169, 169, 169);
                 btn.Enabled = false;
- 
             }
             else
             {
@@ -249,8 +254,10 @@ namespace pi_store.Views.ChildForm.ManageClients
 
         private void grd_Client_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0 || grd_Client.Rows.Count == 0) return;
-            if (grd_Client.CurrentRow == null) return;
+            if (e.RowIndex < 0 || grd_Client.Rows.Count == 0)
+                return;
+            if (grd_Client.CurrentRow == null)
+                return;
 
             try
             {
@@ -258,9 +265,9 @@ namespace pi_store.Views.ChildForm.ManageClients
                 EnableButtonCustom(btnDelete, true);
 
                 txtID.Text = grd_Client.CurrentRow.Cells[0].Value?.ToString().Trim() ?? "";
-                txtPhone.Text = grd_Client.CurrentRow.Cells[1].Value?.ToString().Trim() ?? "";
+                txtName.Text = grd_Client.CurrentRow.Cells[1].Value?.ToString().Trim() ?? "";
                 txtEmail.Text = grd_Client.CurrentRow.Cells[2].Value?.ToString().Trim() ?? "";
-                txtName.Text = grd_Client.CurrentRow.Cells[3].Value?.ToString().Trim() ?? "";
+                txtPhone.Text = grd_Client.CurrentRow.Cells[3].Value?.ToString().Trim() ?? "";
                 txtAddress.Text = grd_Client.CurrentRow.Cells[4].Value?.ToString().Trim() ?? "";
             }
             catch (Exception ex)
@@ -349,10 +356,9 @@ namespace pi_store.Views.ChildForm.ManageClients
         {
             placeholderLabel.Visible = string.IsNullOrEmpty(txtSearch.Text);
 
-            if (string.IsNullOrEmpty(txtSearch.Text)) 
+            if (string.IsNullOrEmpty(txtSearch.Text))
             {
-              
-                List<Client> clients = clientController.GetAllClients(); 
+                List<Client> clients = clientController.GetAllClients();
                 grd_Client.Rows.Clear();
 
                 foreach (var client in clients)
@@ -367,5 +373,47 @@ namespace pi_store.Views.ChildForm.ManageClients
                 }
             }
         }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            grd_Client.ClearSelection();
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "CSV files (*.csv)|*.csv";
+            saveFileDialog.FileName = "Clients.csv"; // Default filename for the file
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                using (XLWorkbook workbook = new XLWorkbook())
+                {
+                    var worksheet = workbook.Worksheets.Add("Sheet1");
+
+                    // Add header to the first row
+                    for (int j = 0; j < grd_Client.Columns.Count; j++)
+                    {
+                        worksheet.Cell(1, j + 1).Value = grd_Client.Columns[j].HeaderText; // j + 1 because Excel starts at 1
+                    }
+
+                    // Populate data from DataGridView to worksheet starting from the second row
+                    for (int i = 0; i < grd_Client.Rows.Count; i++)
+                    {
+                        for (int j = 0; j < grd_Client.Columns.Count; j++)
+                        {
+                            object cellValue = grd_Client.Rows[i].Cells[j].Value;
+                            worksheet.Cell(i + 2, j + 1).Value = cellValue?.ToString(); // i + 2 to start from the second row
+                        }
+                    }
+
+                    // Save file as CSV
+                    using (var stream = new FileStream(saveFileDialog.FileName, FileMode.Create))
+                    {
+                        workbook.SaveAs(stream);
+                    }
+
+                    MessageBox.Show("Data exported successfully!", "Export CSV", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+
     }
 }

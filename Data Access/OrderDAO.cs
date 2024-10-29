@@ -24,11 +24,11 @@ namespace pi_store.DataAccess
             List<Order> orders = new List<Order>();
             string query =
                 @"SELECT o.ID, o.ClientID, o.EmployeeID, c.Name AS ClientName, 
-                            e.Name AS EmployeeName, o.OrderDate, o.TotalPrice
-                     FROM [Order] o
-                     JOIN Client c ON o.ClientID = c.ID
-                     JOIN Employee e ON o.EmployeeID = e.ID
-                     ORDER BY o.OrderDate DESC";
+                    e.Name AS EmployeeName, o.OrderDate, o.TotalPrice
+             FROM [Order] o
+             JOIN Client c ON o.ClientID = c.ID
+             LEFT JOIN Employee e ON o.EmployeeID = e.ID
+             ORDER BY o.OrderDate DESC";
 
             using (SqlCommand command = new SqlCommand(query, conn.GetConnection()))
             {
@@ -39,9 +39,9 @@ namespace pi_store.DataAccess
                     {
                         ID = reader["ID"].ToString(),
                         ClientID = reader["ClientID"].ToString(),
-                        EmployeeID = reader["EmployeeID"].ToString(),
+                        EmployeeID = reader["EmployeeID"] != DBNull.Value ? reader["EmployeeID"].ToString() : null,
                         ClientName = reader["ClientName"].ToString(),
-                        EmployeeName = reader["EmployeeName"].ToString(),
+                        EmployeeName = reader["EmployeeName"] != DBNull.Value ? reader["EmployeeName"].ToString() : "Unknown",
                         OrderDate = Convert.ToDateTime(reader["OrderDate"]),
                         TotalPrice = Convert.ToInt32(reader["TotalPrice"]),
                     };
@@ -51,6 +51,7 @@ namespace pi_store.DataAccess
             }
             return orders;
         }
+
 
         public List<Order> GetAllOrders_1()
         {

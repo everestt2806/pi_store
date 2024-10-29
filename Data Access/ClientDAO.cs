@@ -152,16 +152,60 @@ ORDER BY TotalSpent DESC";
             }
         }
 
-        public void DeleteClient(string id)
+        public void DeleteClient(string clientId)
         {
-            string query = "DELETE FROM Client WHERE ID = @ID";
-
-            using (SqlCommand command = new SqlCommand(query, conn.GetConnection()))
+            using (var connection = conn.GetConnection())
             {
-                command.Parameters.AddWithValue("@ID", id);
-                command.ExecuteNonQuery();
+
+              
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        
+                        string deleteOrderItemsQuery = @"
+                    DELETE FROM OrderItem 
+                    WHERE OrderID IN (
+                        SELECT ID FROM [Order] WHERE ClientID = @ClientID
+                    )";
+
+                        using (var orderItemsCommand = new SqlCommand(deleteOrderItemsQuery, connection, transaction))
+                        {
+                            orderItemsCommand.Parameters.AddWithValue("@ClientID", clientId);
+                            orderItemsCommand.ExecuteNonQuery();
+                        }
+
+                        
+                        string deleteOrdersQuery = "DELETE FROM [Order] WHERE ClientID = @ClientID";
+
+                        using (var ordersCommand = new SqlCommand(deleteOrdersQuery, connection, transaction))
+                        {
+                            ordersCommand.Parameters.AddWithValue("@ClientID", clientId);
+                            ordersCommand.ExecuteNonQuery();
+                        }
+
+                        
+                        string deleteClientQuery = "DELETE FROM Client WHERE ID = @ClientID";
+
+                        using (var clientCommand = new SqlCommand(deleteClientQuery, connection, transaction))
+                        {
+                            clientCommand.Parameters.AddWithValue("@ClientID", clientId);
+                            clientCommand.ExecuteNonQuery();
+                        }
+
+                       
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        
+                        transaction.Rollback();
+                        throw new Exception("Có lỗi xảy ra khi xóa Client: " + ex.Message);
+                    }
+                }
             }
         }
+
 
         public List<Client> SearchClients(string searchTerm)
         {

@@ -14,7 +14,6 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
-using System.IO;
 using Font = iTextSharp.text.Font;
 using Paragraph = iTextSharp.text.Paragraph;
 
@@ -51,7 +50,6 @@ namespace pi_store.Views.ChildForm.GenerateBill
             txtTotalCost.Enabled = false;
             
         }
-        string clientID;
         private void LoadOrder()
         {
             List<Order> orders = orderController.GetAllOrders();

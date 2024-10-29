@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClosedXML.Excel;
 using pi_store.Controllers;
 using pi_store.Models;
 
@@ -510,6 +512,47 @@ namespace pi_store.Views.ChildForm.ManageEmployees
             dtHiredate.Enabled = false;
             dtHiredate.Value = DateTime.Now;
             txtName.Focus();
+        }
+
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            grd_Employee.ClearSelection();
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "CSV files (*.csv)|*.csv";
+            saveFileDialog.FileName = "Employees.csv"; // Default filename for the file
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                using (XLWorkbook workbook = new XLWorkbook())
+                {
+                    var worksheet = workbook.Worksheets.Add("Sheet1");
+
+                    // Add header to the first row
+                    for (int j = 0; j < grd_Employee.Columns.Count; j++)
+                    {
+                        worksheet.Cell(1, j + 1).Value = grd_Employee.Columns[j].HeaderText; // j + 1 because Excel starts at 1
+                    }
+
+                    // Populate data from DataGridView to worksheet starting from the second row
+                    for (int i = 0; i < grd_Employee.Rows.Count; i++)
+                    {
+                        for (int j = 0; j < grd_Employee.Columns.Count; j++)
+                        {
+                            object cellValue = grd_Employee.Rows[i].Cells[j].Value;
+                            worksheet.Cell(i + 2, j + 1).Value = cellValue?.ToString(); // i + 2 to start from the second row
+                        }
+                    }
+
+                    // Save file as CSV
+                    using (var stream = new FileStream(saveFileDialog.FileName, FileMode.Create))
+                    {
+                        workbook.SaveAs(stream);
+                    }
+
+                    MessageBox.Show("Data exported successfully!", "Export CSV", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
     }
 }

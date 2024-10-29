@@ -32,7 +32,6 @@ CREATE TABLE [dbo].[Order](
     [OrderDate] DATETIME NOT NULL,
     [TotalPrice] DECIMAL(18, 2) NOT NULL,
     FOREIGN KEY (ClientID) REFERENCES [dbo].[Client](ID),
-    FOREIGN KEY (EmployeeID) REFERENCES [dbo].[Employee](ID)
 );
 GO
 
@@ -61,65 +60,58 @@ CREATE TABLE [dbo].[UserInfo](
 	[Username] VARCHAR(20),
 	[Password] VARCHAR(20)
 )
--- Thêm dữ liệu mẫu vào bảng Employee
-INSERT INTO Employee (ID, Name, Email, Phone, Address, Salary, HireDate)
-VALUES 
-('EP1001', N'Nguyễn Văn A', 'nguyenvana@example.com', '0123456789', N'123 Nguyễn Trãi, Hà Nội', 15000000, '2023-01-15'),
-('EP1002', N'Trần Thị B', 'tranthib@example.com', '0987654321', N'456 Lê Lợi, Đà Nẵng', 12000000, '2023-02-20'),
-('EP1003', N'Lê Văn C', 'levanc@example.com', '0912345678', N'789 Trường Sa, HCM', 17000000, '2022-12-01'),
-('EP1004', N'Phạm Thị D', 'phamthid@example.com', '0908765432', N'12 Hai Bà Trưng, Huế', 13000000, '2023-03-05'),
-('EP1005', N'Hoàng Văn E', 'hoangvane@example.com', '0934567890', N'34 Võ Văn Kiệt, Cần Thơ', 11000000, '2023-04-12');
+-- Add sample data for Client table
+INSERT INTO [dbo].[Client] (ID, Name, Email, Phone, Address) VALUES 
+('CL01', N'Nguyễn Văn A', 'vananguyen@gmail.com', '0945638338', N'123 Phạm Văn Đồng, Hà Nội'),
+('CL02', N'Lê Thị B', 'lethib@example.com', '0987654321', N'456 Lê Duẩn, Đà Nẵng'),
+('CL03', N'Trần Văn C', 'tranvc@gmail.com', '0945123456', N'789 Điện Biên Phủ, TP.HCM'),
+('CL04', N'Phạm Minh D', 'phammd@gmail.com', '0912345678', N'234 Hai Bà Trưng, Huế'),
+('CL05', N'Đỗ Thị E', 'dothe@gmail.com', '0934567890', N'567 Nguyễn Trãi, Cần Thơ');
 
--- Dữ liệu mẫu cho bảng Client
-INSERT INTO Client (ID, Name, Email, Phone, Address)
-VALUES 
-('CL1001', N'Nguyễn Thị F', 'nguyenthif@example.com', '0932123456', N'123 Phan Đình Phùng, Hà Nội'),
-('CL1002', N'Trần Văn G', 'tranvang@example.com', '0943123456', N'56 Phạm Văn Đồng, Đà Nẵng'),
-('CL1003', N'Lê Thị H', 'lethih@example.com', '0911223344', N'78 Lý Tự Trọng, HCM'),
-('CL1004', N'Nguyễn Văn I', 'nguyenvani@example.com', '0988112233', N'34 Tôn Đức Thắng, Huế'),
-('CL1005', N'Bùi Thị K', 'buithik@example.com', '0922334455', N'45 Nguyễn Thị Minh Khai, Cần Thơ');
+-- Add sample data for Employee table
+INSERT INTO [dbo].[Employee] (ID, Name, Email, Phone, Address, Salary, HireDate) VALUES 
+('EP01', N'Nguyễn Tiến K', 'nguyentienk@gmail.com', '0923456781', N'123 Bạch Mai, Hà Nội', 15000000, '2022-01-15'),
+('EP02', N'Trần Thị L', 'tranl@example.com', '0934567812', N'234 Trần Hưng Đạo, Đà Nẵng', 18000000, '2021-06-10'),
+('EP03', N'Phạm Văn M', 'phammv@gmail.com', '0912345678', N'345 Lê Lợi, TP.HCM', 12000000, '2023-03-25'),
+('EP04', N'Lê Thị N', 'lethine@gmail.com', '0976543210', N'456 Hai Bà Trưng, Huế', 20000000, '2020-11-01'),
+('EP05', N'Nguyễn Văn P', 'nguyenp@gmail.com', '0956781234', N'678 Trần Phú, TP.HCM', 16000000, '2021-08-20');
 
--- Dữ liệu mẫu cho bảng Product
-INSERT INTO Product (ID, Name, Description, Price, Quantity)
-VALUES 
-('PD1001', N'Laptop Dell XPS 13', N'Ultrabook cao cấp, màn hình 13 inch', 15000000, 50),
-('PD1002', N'iPhone 14 Pro', N'Diện thoại thông minh cao cấp của Apple', 12000000, 30),
-('PD1003', N'Samsung Galaxy Tab S8', N'Máy tính bảng Android với màn hình 11 inch', 8000000, 40),
-('PD1004', N'AirPods Pro', N'Tai nghe không dây chống ồn của Apple', 2500000, 100),
-('PD1005', N'Apple Watch Series 8', N'Đồng hồ thông minh với cảm biến sức khỏe', 5000000, 60),
-('PD1006', N'Lenovo ThinkPad X1 Carbon', N'Laptop siêu nhẹ, bền bỉ cho doanh nhân', 18000000, 25),
-('PD1007', N'Sony WH-1000XM4', N'Tai nghe không dây chống ồn hàng đầu', 350000, 70),
-('PD1008', N'Google Pixel 6', N'Diện thoại thông minh với camera chất lượng cao', 4500000, 20),
-('PD1009', N'ASUS ROG Zephyrus G14', N'Máy tính xách tay chơi game mạnh mẽ', 23000000, 15),
-('PD1010', N'Kindle Paperwhite', N'Máy đọc sách điện tử với màn hình chống lóa', 3400000, 90);
+-- Add sample data for Product table
+INSERT INTO [dbo].[Product] (ID, Name, Description, Price, Quantity) VALUES 
+('PD01', N'Nón Thời Trang A', N'Nón thời trang cao cấp', 2000000, 50),
+('PD02', N'Nón Thời Trang B', N'Nón thời trang trẻ trung', 2500000, 40),
+('PD03', N'Túi Xách C', N'Túi xách chính hãng', 5000000, 30),
+('PD04', N'Túi Xách D', N'Túi xách cao cấp', 7000000, 20),
+('PD05', N'Áo Thời Trang E', N'Áo thời trang nữ', 1000000, 100),
+('PD06', N'Áo Thời Trang F', N'Áo thời trang nam', 1500000, 60),
+('PD07', N'Quần Jean G', N'Quần jean nữ', 3000000, 80),
+('PD08', N'Quần Jean H', N'Quần jean nam', 3500000, 75),
+('PD09', N'Giày Thể Thao I', N'Giày thể thao nữ', 4500000, 60),
+('PD10', N'Giày Thể Thao J', N'Giày thể thao nam', 5000000, 45);
 
+-- Add sample data for Order table
+INSERT INTO [dbo].[Order] (ID, ClientID, EmployeeID, OrderDate, TotalPrice) VALUES 
+('OD01', 'CL01', 'EP01', '2023-08-15', 10000000),
+('OD02', 'CL02', 'EP02', '2023-08-20', 8000000),
+('OD03', 'CL03', 'EP03', '2023-08-25', 7000000),
+('OD04', 'CL04', 'EP04', '2023-09-01', 12000000),
+('OD05', 'CL05', 'EP05', '2023-09-05', 9000000);
 
-
--- Dữ liệu mẫu cho bảng Order
-INSERT INTO [Order] (ID, ClientID, EmployeeID, OrderDate, TotalPrice)
-VALUES 
-('OD1001', 'CL1001', 'EP1001', '2024-09-25 10:30:00', 9000000),
-('OD1002', 'CL1002', 'EP1002', '2024-09-26 15:45:00', 6000000),
-('OD1003', 'CL1003', 'EP1003', '2024-09-27 09:20:00', 5000000),
-('OD1004', 'CL1004', 'EP1004', '2024-09-28 11:00:00', 7500000),
-('OD1005', 'CL1005', 'EP1005', '2024-09-29 14:50:00', 4000000);
-
--- Dữ liệu mẫu cho bảng OrderItem
-INSERT INTO OrderItem (ID, OrderID, ProductID, Quantity)
-VALUES 
-('OI1001', 'OD1001', 'PD1001', 2),
-('OI1002', 'OD1001', 'PD1003', 3),
-('OI1003', 'OD1002', 'PD1002', 1),
-('OI1004', 'OD1002', 'PD1004', 2),
-('OI1005', 'OD1003', 'PD1005', 1),
-('OI1006', 'OD1003', 'PD1003', 2),
-('OI1007', 'OD1004', 'PD1001', 3),
-('OI1008', 'OD1004', 'PD1002', 1),
-('OI1009', 'OD1005', 'PD1004', 2),
-('OI1010', 'OD1005', 'PD1005', 1);
+-- Add sample data for OrderItem table
+INSERT INTO [dbo].[OrderItem] (ID, OrderID, ProductID, Quantity) VALUES 
+('OI01', 'OD01', 'PD01', 3),   -- 3 * 2000000 = 6000000
+('OI02', 'OD01', 'PD03', 1),   -- 1 * 5000000 = 5000000
+('OI03', 'OD02', 'PD02', 2),   -- 2 * 2500000 = 5000000
+('OI04', 'OD02', 'PD05', 3),   -- 3 * 1000000 = 3000000
+('OI05', 'OD03', 'PD04', 1),   -- 1 * 7000000 = 7000000
+('OI06', 'OD04', 'PD07', 2),   -- 2 * 3000000 = 6000000
+('OI07', 'OD04', 'PD09', 1),   -- 1 * 4500000 = 4500000
+('OI08', 'OD05', 'PD06', 4),   -- 4 * 1500000 = 6000000
+('OI09', 'OD05', 'PD10', 1),   -- 1 * 5000000 = 5000000
+('OI10', 'OD05', 'PD08', 1);   -- 1 * 3500000 = 3500000 
 
 
-insert into UserInfo(Username, Password)
+INSERT INTO  UserInfo(Username, Password)
 VALUES 
 ('user1', '123456'),
 ('user2', '123456');

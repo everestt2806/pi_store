@@ -287,6 +287,7 @@
             this.Controls.Add(this.title_bar);
             this.Controls.Add(this.menu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Management_Form";
             this.Text = "PiStore Management";

@@ -23,7 +23,7 @@ The system uses the following SQL Server database schema:
 - Product (ID, Name, Description, Price, Quantity)
 - Order (ID, ClientID, EmployeeID, OrderDate, TotalPrice)
 - OrderItem (ID, OrderID, ProductID, Quantity)
-- Bill (ID, OrderID, ClientID, EmployeeID, BillDate, TotalPrice)
+
 
 ## Getting Started
 

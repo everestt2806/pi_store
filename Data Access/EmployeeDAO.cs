@@ -116,14 +116,29 @@ namespace pi_store.DataAccess
 
         public void DeleteEmployee(string id)
         {
-            string query = "DELETE FROM Employee WHERE ID = @ID";
+            // Cập nhật các đơn hàng có EmployeeID là id thành NULL trước khi xóa
+            string updateOrdersQuery = "UPDATE [Order] SET EmployeeID = NULL WHERE EmployeeID = @ID";
 
-            using (SqlCommand command = new SqlCommand(query, conn.GetConnection()))
+            using (var connection = conn.GetConnection())
             {
-                command.Parameters.AddWithValue("@ID", id);
-                command.ExecuteNonQuery();
+                // Cập nhật EmployeeID thành NULL trong các bản ghi liên quan
+                using (SqlCommand updateCommand = new SqlCommand(updateOrdersQuery, connection))
+                {
+                    updateCommand.Parameters.AddWithValue("@ID", id);
+                    updateCommand.ExecuteNonQuery();
+                }
+
+                // Xóa Employee
+                string deleteEmployeeQuery = "DELETE FROM Employee WHERE ID = @ID";
+                using (SqlCommand deleteCommand = new SqlCommand(deleteEmployeeQuery, connection))
+                {
+                    deleteCommand.Parameters.AddWithValue("@ID", id);
+                    deleteCommand.ExecuteNonQuery();
+                }
             }
         }
+
+
 
         public List<Employee> SearchEmployees(string searchTerm)
         {
